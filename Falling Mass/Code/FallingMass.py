@@ -6,6 +6,11 @@ from scipy.optimize import curve_fit
 # Misure dirette---mettete i vostri numeri!
 # Qui potete anche leggere i dati da file, usando il metodo np.loadtxt(),
 # se lo trovate comodo.
+"""
+t=np.loadtxt("FallingMass", dtype=float,  delimiter=None)
+print(t)
+"""
+
 t = np.array([0.0, 0.0333, 0.0666, 0.1, 0.1333, 0.1666, 0.2, 0.2333, 0.2666, 0.3, 0.3333, 0.3666, 0.4, 0.4333, 0.4666, 0.5, 0.5333, 0.5666, 0.6, 0.6333])
 h = np.array([198.5, 197.5, 195.5, 193.0, 190.0, 185.0, 179.0, 173.0, 165.0,156.5, 146.5, 134.0, 122.0, 108.0, 93.0, 77.0, 60.0, 42.0, 22.0, 3.0])
 sigma_h = np.array([0.29, 0.33, 0.38, 0.43, 0.47, 0.52, 0.56, 0.61, 0.65, 0.70, 0.74,0.79, 0.84, 0.88, 0.93, 0.97, 1.0, 1.1, 1.1, 1.2])
