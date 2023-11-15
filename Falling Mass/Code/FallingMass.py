@@ -3,26 +3,27 @@ import numpy as np
 from matplotlib import pyplot as plt
 from scipy.optimize import curve_fit
 
-# Misure dirette---mettete i vostri numeri!
-# Qui potete anche leggere i 5dati da file, usando il metodo np.loadtxt(),
-# se lo trovate comodo.
-
-## CODICE SENZA SENSO
-"""
-t=np.loadtxt('FallingMass.txt', dtype=float,  delimiter=None)
-print(t)
-
-#t = np.array([0.03,0.13,0.20,1.06,2.09,2.28])
-h = np.array([10,20,27,56,187,280])
-"""
-## CODICE MENO SCHIFOSO
-
-
-
 ## DATI
-t = np.array([0.0, 0.0333, 0.0666, 0.1, 0.1333, 0.1666, 0.2, 0.2333, 0.2666, 0.3, 0.3333, 0.3666, 0.4, 0.4333, 0.4666, 0.5, 0.5333, 0.5666, 0.6, 0.6333])
-h = np.array([198.5, 197.5, 195.5, 193.0, 190.0, 185.0, 179.0, 173.0, 165.0, 156.5, 146.5, 134.0, 122.0, 108.0, 93.0, 77.0, 60.0, 42.0, 22.0, 3.0])
-sigma_h = np.array([0.29, 0.33, 0.38, 0.43, 0.47, 0.52, 0.56, 0.61, 0.65, 0.70, 0.74,0.79, 0.84, 0.88, 0.93, 0.97, 1.0, 1.1, 1.1, 1.2])
+file_name = r'C:\Users\zoom3\Documents\Laboratorio I\LaboratoryReports\FallingMass\FallingMass\FallingMassDistances.txt'#CAMBIARE DIPENDENTEMENTE DAL DISPOSITIVO
+
+with open(file_name, 'r') as f:
+    lines = f.read()
+
+print(lines)
+
+transcript=np.loadtxt(file_name, dtype=float,  delimiter=',')
+print(transcript)
+
+nummeas=int(transcript.size*0.5)#numero di misure
+print(nummeas)
+tin=0#Tempo Finale in secondi
+tfi=1#Tempo Iniziale in secondi
+t=np.linspace(tin,tfi,nummeas)#Array dei tempi
+
+h=transcript[0::2]
+sigma_h=transcript[1::2]
+print(h)
+print(sigma_h)
 
 ##CONVERSIONI
 h = h / 100.0
@@ -31,6 +32,7 @@ sigma_h = sigma_h / 100.0
 
 ## FIT
 def parabola(t, a, v0, h0):
+
     """
     Modello di fit quadratico.
     """
@@ -69,11 +71,6 @@ ax2.set(xlabel='[s]', ylabel='[m]')
 ax2.grid(ls="dashed", which="both", color="gray")
 leg = ax2.legend()
 ##Salvataggio
-#plt.savefig(’legge_oraria.pdf’)
-
-plt.show()
-
-
-#plt.savefig(’legge_oraria.pdf’)
+plt.savefig(’FallingMassPlot.pdf’)
 
 plt.show()
