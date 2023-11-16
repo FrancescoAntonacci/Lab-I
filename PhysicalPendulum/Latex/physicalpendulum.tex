@@ -1,0 +1,169 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{\textbf{Laboratorio}}
+\author{\textbf{Pendolo}}
+\date{16 novembre 2023}
+
+\begin{document}
+
+\maketitle
+
+\section{Informazioni generali}
+Studio del periodo di un pendolo fisico forato a diverse distanze dal centro di massa. $\\$
+Data: 16 novembre 2023 $\\$
+Autori: Francesco Angelo Antonacci e Alessandro Di Meglio
+
+
+
+
+
+
+
+\section{Scopo dell'esperienza}
+Lo scopo dell'esperienza è quello misurare il periodo di un pendolo considerando vari punti dell'asta di riferimento. 
+
+\section{Cenni teorici} 
+Nell'esperienza sono state utilizzate delle formule per il calcolo degli errori e della loro propagazione:
+
+
+
+
+
+\section {Apparato strumentale} 
+Gli strumenti considerati durante l'esperienza laboratoriale sono:
+ -cronometro digitale con risoluzione ai centesimi di secondo.$\\$
+ -metro a nastro con risoluzione ai millimetri $\\$
+ -calibro con risoluzione ventesimale $\\$
+ -asta forata in diversi punti.$\\$
+ -supporto
+ In questa sezione descriviamo gli oggetti utilizzati nell'esperimento ove necessario: $\\$ $\\$
+\undersection{{\textbf{Asta} \textbf{forata}}} $\\$
+L'asta forata utilizzata per l'esperienza, è di alluminio ed è forata in diversi punti. Chiaramente l'asta non può essere definita uniforme in quanto è bucata in dieci punti differenti ma per l'esperimento viene considerata come tale. $\\$ \undersection{{\textbf{Supporto}}} $\\$
+L'asta è stata, come detto prima, forata. Per calcolare le oscillazioni è necessario utilizzare un supporto fissato al tavolo di lavoro capace di mantenere l'asta sollevata. Il supporto è anche dotato di una sezione dedicata
+all'inserimento dell'asta nei suoi diversi punti forati grazie all'ausilio di una vite.
+
+\section{\textbf{Descrizione} \textbf{delle} \textbf{misure}}
+Per quanto riguarda l'esperienza in sè è necessario raccogliere dei dati e rapportarli agli errori di misura. Per prima cosa è stata misurata la lunghezza dell'asta grazie al metro a nastro: \begin{tabular}{|c|}
+  \hline
+  Lunghezza asta \\
+  \hline
+  $1.050 \pm 0.001$ m \\
+  \hline
+\end{tabular} $\\$ $\\$la distanza fra i fori:
+\documentclass{}
+
+\begin{document}
+
+\begin{table}[h]
+    \centering
+    \label{tab:lunghezza-asta}
+    \begin{tabular}{|c|}
+        \hline
+        Distanza dei fori da un estremo dell'asta \\
+        \hline
+        $0.005 \pm 0.001$ m \\
+        $0.150 \pm 0.001$ m \\
+        $0.250\pm 0.001$ m \\
+        $0.350 \pm 0.001$ m \\
+        $0.450 \pm 0.001$ m \\
+        $0.550 \pm 0.001$ m \\
+        $0.650 \pm 0.001$ m \\
+        $0.750 \pm 0.001$ m \\
+        $0.850 \pm 0.001$ m \\
+        $0.950 \pm 0.001$ m \\
+        \hline
+    \end{tabular}
+\end{table}
+
+e la grandezza di quest'ultimi con il calibro ventesimale che risultano essere tutti nell'intervallo di misura:
+\begin{tabular}{|c|}
+  \hline
+  Larghezza foro \\
+  \hline
+  $0.50 \pm 0.05$ mm \\
+  \hline
+\end{tabular} $\\$ $\\$
+
+L'altra misura necessaria è legata all'angolo di oscillazione dell'asta. Lo scopo della misura è trovare un angolo tale per cui la seguente formula sia verificata:
+ \begin{equation}
+    \Theta_0 \ll 4\cdot\sqrt{\frac{\sigma_T}{T}}
+\end{equation}
+In quanto se l'angolo verifica la disuguaglianza possiamo allora approssimare
+\documentclass{}
+\usepackage{}
+
+\begin{document} 
+\begin{equation}
+    \sin(\theta_0) = \theta_0
+\end{equation}
+al primo ordine dello sviluppo in serie di Taylor.
+Analizziamo gli elementi della disequazione precedente: $\\$
+$\theta_0$ : è l'angolo che vogliamo ottenere.$\\$
+$\sigma_T$ : è l'incertezza sul tempo, ovvero l'errore dato dalla somma in quadrature dell'errore dello strumento utilizzato e l'errore dato dal tempo di reazione umano.$\\$
+Per provare a trovae un angolo che rispettasse quanto detto abbiamo spostato l'asta e calcolato la distanza rispetto al punto di partenza, rispetto allo stato di quiete. E' stato quindi calcolato l'angolo, avendo due cateti a disposizione, ottenendo una misura coerente. Spostando di circa 5 centimetri l'asta abbiamo calcolato un angolo di 0,1 radianti.
+Questa misura è stata effetuata fissando il foro più vicino al centro di massa, in quanto, se la condizione dettata dall'equazione (1) fosse stata rispettata nel caso del periodo minimo, allora sarebbe valsa anche per tutti gli altri casi. $\\$  
+Per calcolare il tempo di reazione abbiamo realizzato una media di cinque misurazioni per capire il tempo di reazione. Uno di noi fa partire due cronometri del telefono nello stesso momento, l'altro ragazzo prende uno dei due dispositivi e lo ferma quando vuole mentre l'altro stoppa il tempo appena percepisce l'azione del compagno.
+Rappresentiamo la formula che descrive l'incertezza sul tempo:
+\begin{equation}
+\[
+\sqrt{tempo_{\text{strumento}}^2 + tempo_{\text{reazione}}^2}
+\]
+\end{equation}
+Ecco una tabella dei dati presi:
+\begin{tabular}{|c|c|}
+  \hline
+  Tempo di reazione & Tempo strumento \\
+  \hline
+  $0.27 \pm 0.01$ s & $0.01$ s \\
+  $0.15 \pm 0.01$ s & $0.01$ s \\
+  $0.21 \pm 0.01$ s & $0.01$ s \\
+  $0.23 \pm 0.01$ s & $0.01$ s \\
+  $0.16 \pm 0.01$ s & $0.01$ s \\
+  \hline
+\end{tabular} $\\$
+L'errore strumentale è molto minore dell'errore dato dal tempo di reazione di conseguenza possiamo trascurarlo. Il risultato della stima dell'errore sulle misure di tempo effettuate sul cronometro è di 0.20s Le misure sono state realizzate su un numero di oscillazioni pari a 5.$\\$Di seguito una tabella dove vengono esplicitati i dati. I numeri della prima riga rappresentano il foro della misura effettuata.
+\documentclass{}
+
+\begin{document}
+
+\begin{}
+    \centering
+    \caption{Tempo per compiere 5 oscillazioni complete per foro}
+    \label{tab:dati-numeri-foro}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{Numero misura} \\
+        \hline
+        8.04 & 8.35 & 8.04 & 8.19 & 8.13 & 8.13 & 8.13 & 8.18 & 8.16 & 8.17 & 1 \\
+        7.85 & 7.89 & 7.92 & 7.84 & 7.91 & 7.78 & 7.85 & 7.96 & 7.99 & 7.99 & 2 \\
+        7.80 & 7.85 & 7.80 & 7.77 & 7.86 & 7.92 & 7.76 & 7.79 & 7.84 & 7.86 & 3 \\
+        8.37 & 8.44 & 8.37 & 8.42 & 8.32 & 8.38 & 8.22 & 8.30 & 8.31 & 8.26 & 4 \\
+        11.40 & 11.29 & 11.35 & 11.40 & 11.54 & 11.35 & 11.41 & 11.48 & 11.40 & 11.39 & 5 \\
+        19.01 & 18.91 & 18.76 & 18.97 & 19.00 & 19.04 & 18.84 & 18.85 & 18.92 & 18.66 & 6 \\
+        9.29 & 9.29 & 9.24 & 9.50 & 9.35 & 9.30 & 9.36 & 9.31 & 9.37 & 9.29 & 7 \\
+        7.99 & 8.09 & 8.01 & 8.05 & 7.97 & 8.04 & 7.99 & 8.04 & 7.98 & 8.03 & 8 \\
+        7.80 & 7.91 & 7.86 & 7.77 & 7.79 & 7.83 & 7.87 & 7.86 & 7.83 & 7.90 & 9 \\
+        7.94 & 7.98 & 8.04 & 8.06 & 8.17 & 7.92 & 7.96 & 7.91 & 8.10 & 8.11 & 10 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+
+\section{Analisi dei dati}
+Con i dati raccolti è stato possibile creare un fit, l'andamento dei nostri dati e dei rispettivi errori:
+
+\begin{document}
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.6\textwidth]{C:\Users\Main\Desktop\latex\physicalpendulum_plots (1)}
+    \caption{Descrizione dell'immagine.}
+    \label{fig:nome_etichetta}
+\end{figure}
+
+
+\section{Conclusioni}
+
+
+\end{document}
