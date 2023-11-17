@@ -59,7 +59,7 @@ ratio=diffFitData/sigma_h
 ax2.plot(t,ratio,"o") #Scarto ValoriMedi-Fit
 
 
-ax2.set(xlabel='time[s]', ylabel='Distance in error barr  fit-measured distances')
+ax2.set(xlabel='time[s]', ylabel='Distance in error bars  fit-measured distances')
 ax2.grid(ls="dashed", which="both", color="gray")
 
 
