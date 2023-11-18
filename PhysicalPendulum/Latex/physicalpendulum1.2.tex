@@ -1,5 +1,4 @@
 
-
 \documentclass[11pt]{article} 
 
 \usepackage{geometry} 
@@ -14,15 +13,44 @@
 \begin{document}
 \maketitle
 
-\section{Introduzione}
-
 \section{Scopo dell'esperienza}
+
+In questa relazione di laboratorio si intende verificare sperimentalmente il modello predittivo del periodo di un pendolo fisico dato dall'equazione (5).
 
 \section{Cenni teorici}
 
-\section{Apparato strumentale}
+Un corpo rigido sospeso in un punto diverso dal centro di massa e sottoposto all' accelerazione di gravità costituisce un pendolo fisico.
+Se spostato di un angolo $\theta$ dalla posizione di equilibrio, il momento torcente agente sull corpo rispetto a al centro in cui è incernierato :
+\begin{equation}
+\tau  = -mgd sin(\theta)
+\end{equation}
 
-Discutiamo ora del restante apparato strumentale:
+Per la seconda equazione cardinale si ha anche che:
+
+
+\begin{equation}
+\tau  =\frac{dL}{dt}
+\end{equation}
+
+Essendoci anche note le relazioni $L=I\omega  $ e $\omega=\frac{d\theta}{dt}$, ci è possibile ottenere la seguente equazione:
+
+\begin{equation}
+\tau=I\frac{d\theta^2}{dt^2}
+\end{equation}
+Combianando la (1) e la (3) otteniamo:
+\begin{equation}
+I\frac{d\theta^2}{dt^2}+\frac{mgd}{I}sin(\theta)=0
+\end{equation}
+Quest'equazione differenziale, con le dovute considerazioni discusse nella sezione "\textbf {Approssimazioni}" , è approssimabile con quella del moto armonico con $T_0=2\pi\sqrt{\frac{I}{mgd}}$ .
+Con le dovute considerazioni discusse nella sezione "\textbf {Approssimazioni}", consideremo il momento di inerzia del corpo rispetto all'asse perpendicolare all'asse dell'asta passante per il centro di massa come $I_cm=\frac{ml^2}{12}$.
+Per il teorema di Huygens-Steiner I in un generico asse parallelo a quello appena considerato sarà $I=\frac{ml^2}{12}+d^2m$.
+Da cui otteniamo, ponendola a sistema con le precedenti, l'equazione che costituisce il modello predittivo del periodo che si intende verificare:
+
+\begin{equation}
+T(d)=2\pi\sqrt{\frac{\frac{l^2}{12}+d^2}{gd}}
+\end{equation}
+
+\section{Apparato sperimentale}
 \subsection{Asta Forata}
 L'oggetto che costituisce il pendolo fisico in questo esperimento è un'asta di allumino.
 Lungo  una delle due sezioni più piccole passano fori identici  tra loro.
@@ -105,8 +133,19 @@ Leggere la sezione "\textbf{Approssimazioni}" in merito al comportamento del sup
 
 \subsection{Approssimazioni}
 \subsubsection{Supporto}
-E' stato osservato che nonostante il supporto del particolare esperimento era soggetto
+E' stato osservato che nonostante il supporto del particolare esperimento fosse potenzialmente soggetto ad oscillazioni in tutti i gradi di libertà per effetti di elasticità, nelle particolari sollecitazioni dell'esperimento è ragionevole supporlo come immobile in quanto gli effetti non sono osservabili dall'occhio umano.
+\subsubsection{Momento di inerzia}
+Supposto momentanamente che l'asta fosse omogenea, il momento di inerzia dell'asta considerata come un parallelepipedo omogeneo è $I=\frac{(l^2+s^2)m}{12}$.
+Ma $\sigma_b ^2 \ll \sigma_a 2a$ di un ordine di grandezza, pertanto un effetto della larghezza della sbarra nella variazione del momento di inerzia e ,pertanto, del periodo non sarebbe apprezzabile per l'effetto che già ha l'errore di misura della lunghezza dell'asta.
+\subsubsection{Piccole Oscillazioni}
+Per poter ridurre l'approssimazione del seno al primo temine della serie al fine di semplificare l'equazione differenziale (5), deve essere soddisfatta la seguente condizione: $\theta_0 \ll 4\sqrt{\frac{\sigma T}{T}}$, ovvero l'errore relativo della misura del tempo deve essere molto maggiore del secondo termine dello sviluppo della serie (gli altri termini continuano a soddisfare la relazione in quanto sono ciascuno diversi ordini di grandezza inferiori al precedente).
+
 \section{Analisi dei dati}
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=20cm, height=15cm]{physicalpendulum_plots_1.0.png}}
+
+\label{fig}
+\end{figure}
 
 \section{Conclusione}
 
