@@ -1,4 +1,3 @@
-
 \documentclass[11pt]{article} 
 
 \usepackage{geometry} 
@@ -15,7 +14,7 @@
 
 \section{Scopo dell'esperienza}
 
-In questa relazione di laboratorio si intende verificare sperimentalmente il modello predittivo del periodo di un pendolo fisico dato dall'equazione (5).
+In questa relazione di laboratorio si intende verificare sperimentalmente il modello predittivo del periodo di un pendolo fisico dato dall'equazione $T(d)=2\pi\sqrt{\frac{\frac{l^2}{12}+d^2}{gd}}$.
 
 \section{Cenni teorici}
 
@@ -26,7 +25,7 @@ Un corpo rigido sospeso in un punto diverso dal centro di massa e sottoposto all
 \label{fig}
 \end{figure}
 
-Se spostato di un angolo $\theta$ dalla posizione di equilibrio, il momento torcente agente sull corpo rispetto a al centro in cui è incernierato :
+Se spostato di un angolo $\theta$ dalla posizione di equilibrio, il momento torcente agente sul corpo rispetto al centro in cui è incernierato è fornito dalla seguente equazione:
 \begin{equation}
 \tau  = -mgd sin(\theta)
 \end{equation}
@@ -38,17 +37,20 @@ Per la seconda equazione cardinale si ha anche che:
 \tau  =\frac{dL}{dt}
 \end{equation}
 
-Essendoci anche note le relazioni $L=I\omega  $ e $\omega=\frac{d\theta}{dt}$, ci è possibile ottenere la seguente equazione:
+Per le relazioni $L=I\omega  $ e $\omega=\frac{d\theta}{dt}$, è  possibile ottenere la seguente equazione:
 
 \begin{equation}
 \tau=I\frac{d\theta^2}{dt^2}
 \end{equation}
-Combianando la (1) e la (3) otteniamo:
+Combinando la (1) e la (3) otteniamo:
 \begin{equation}
 I\frac{d\theta^2}{dt^2}+\frac{mgd}{I}sin(\theta)=0
 \end{equation}
-Quest'equazione differenziale, con le dovute considerazioni discusse nella sezione "\textbf {Approssimazioni}" , è approssimabile con quella del moto armonico con $T_0=2\pi\sqrt{\frac{I}{mgd}}$ .
-Con le dovute considerazioni discusse nella sezione "\textbf {Approssimazioni}", consideremo il momento di inerzia del corpo rispetto all'asse perpendicolare all'asse dell'asta passante per il centro di massa come $I_cm=\frac{ml^2}{12}$.
+Quest'equazione differenziale, con le dovute considerazioni discusse nella sezione "\textbf{Piccole Oscillazioni}",
+è approssimabile con quella del moto armonico con $T_0=2\pi\sqrt{\frac{I}{mgd}}$ .
+
+Con le dovute considerazioni discusse nella sezione "\textbf {Approssimazioni}", consideremo il momento di inerzia del corpo rispetto all'asse perpendicolare all'asse dell'asta passante per il centro di massa come $I_{cm}=\frac{ml^2}{12}$.
+
 Per il teorema di Huygens-Steiner I in un generico asse parallelo a quello appena considerato sarà $I=\frac{ml^2}{12}+d^2m$.
 Da cui otteniamo, ponendola a sistema con le precedenti, l'equazione che costituisce il modello predittivo del periodo che si intende verificare:
 
@@ -59,9 +61,9 @@ T(d)=2\pi\sqrt{\frac{\frac{l^2}{12}+d^2}{gd}}
 \section{Apparato sperimentale}
 \subsection{Asta Forata}
 L'oggetto che costituisce il pendolo fisico in questo esperimento è un'asta di allumino.
-Lungo  una delle due sezioni più piccole passano fori identici  tra loro.
+Lungo l'asta vi è successione di fori identici ed equidistanti.
 Le seguenti misure sono state prese col metro a nastro, eccetto quella dei diametri dei fori la quale è  stata effettata con il calibro ventesimale.
-Riportiamo le misure delle dimensioni dell'asta in "Table1", quelle del diametro e della distanza dei fori in "Table2".
+Si riportano le misure delle dimensioni dell'asta in "Table1", quelle del diametro e della distanza dei fori in "Table2".
 \begin{table}
 \centering
 
@@ -140,10 +142,10 @@ Riportiamo i dati ottenuti dalle misure  di 5 periodi  a "Table3"
 
 
 \subsection{Errori di misura sui periodi misurati}
-Per le misure di tempo è stato usato un cronometro, ciononostante non sarebbe accurato far coincidere l'incertezza delle misure con la sua risoluzione. Per calcolare l'incertezza è stato necessario valutare i tempi di reazione degli sperimentatori: fatti partire due cronometri nello stesso istante, uno sperimentatore ha interrotto il proprio cronometro non appena ha visto l'altro interrompere il proprio. Lo scarto delle misure è stato considerato l'errore dovuto al tempo di reazione.
+Per le misure di tempo è stato usato un cronometro. Per calcolare l'incertezza è stato necessario valutare i tempi di reazione degli sperimentatori: fatti partire due cronometri nello stesso istante, uno sperimentatore ha interrotto il proprio cronometro non appena ha visto l'altro interrompere il proprio. Lo scarto delle misure è stato considerato l'errore dovuto al tempo di reazione.
 Rappresentiamo la formula che descrive l'incertezza che abbiamo misurato per i periodi:
 \begin{equation}
-\sigma  T=\sqrt{tempo_{strumento}^2 + tempo_{reazione}^2}
+\sigma_T=\sqrt{tempo_{strumento}^2 + tempo_{reazione}^2}
 \end{equation}
 
 
@@ -169,14 +171,14 @@ Rappresentiamo la formula che descrive l'incertezza che abbiamo misurato per i p
 
 
 \subsection{Errori di misura sulle lunghezze}
-E' stata assunta come incertezza delle misure prese col metro a nastro $\sigma l_{metro}=0.001 m$ in quanto risoluzione dello strumento.
-E' stata assunta come incertezza delle misure prese col calibro ventesimale $\sigma l_{calibro}=0.0005 m$ in quanto risoluzione dello strumento.
+E' stata assunta come incertezza delle misure prese col metro a nastro la risoluzione dello strumento: $\sigma l_{metro}=0.001 m$.
+E' stata assunta come incertezza delle misure prese col calibro ventesimale la risoluzione dello strumento $\sigma l_{calibro}=0.0005 m$.
 \subsection{Approssimazioni}
 \subsubsection{Supporto}
-E' stato osservato che nonostante il supporto del particolare esperimento fosse potenzialmente soggetto ad oscillazioni in tutti i gradi di libertà per effetti di elasticità, nelle particolari sollecitazioni dell'esperimento è ragionevole supporlo come immobile in quanto gli effetti non sono osservabili dall'occhio umano.
+E' stato osservato che nonostante il supporto del particolare esperimento fosse potenzialmente soggetto ad oscillazioni in tutti i gradi di libertà per effetti di elasticità, nelle particolari sollecitazioni dell'esperimento è ragionevole supporlo come immobile.
 \subsubsection{Momento di inerzia}
-Supposto momentanamente che l'asta fosse omogenea, il momento di inerzia dell'asta considerata come un parallelepipedo omogeneo è $I=\frac{(l^2+s^2)m}{12}$.
-Ma $\sigma_b ^2 \ll \sigma_a 2a$ di un ordine di grandezza, pertanto un effetto della larghezza della sbarra nella variazione del momento di inerzia e ,pertanto, del periodo non sarebbe apprezzabile per l'effetto che già ha l'errore di misura della lunghezza dell'asta.
+Si suppone che l'asta sia omogenea, il momento di inerzia dell'asta considerata come un parallelepipedo omogeneo è $I=\frac{(l^2+s^2)m}{12}$.
+Valendo  $\sigma_b ^2 \ll \sigma_a 2a$, in quanto $\sigma_a 2a$ è un ordinine di grandezza superiore a $\sigma_b^2$, l' effetto della larghezza della sbarra nella variazione del momento di inerzia e ,pertanto, nel periodo non sarebbe apprezzabile, per l'effetto che già ha l'errore di misura della lunghezza dell'asta.
 \subsubsection{Piccole Oscillazioni}
 Per poter ridurre l'approssimazione del seno al primo temine della serie al fine di semplificare l'equazione differenziale (5), deve essere soddisfatta la seguente condizione: $\theta_0 \ll 4\sqrt{\frac{\sigma T}{T}}$, ovvero l'errore relativo della misura del tempo deve essere molto maggiore del secondo termine dello sviluppo della serie (gli altri termini continuano a soddisfare la relazione in quanto sono ciascuno diversi ordini di grandezza inferiori al precedente).
 Nell'esperimento condotto è stato esaminato il caso limite in cui il periodo sarebbe stato massimo e si è trovato che $\theta_{max}=0.1 rad$  sarebbe stato l'angolo massimo per soddisfare la relazione: sono stati adottati angoli minori per tutte le oscillazioni.
@@ -200,10 +202,10 @@ E' stato fatto il grafico dei residui con l' equazione (7).
 \label{fig}
 \end{figure}
 Si osserva che la distanza in barre di errore tra la previsione della curva di best-fit e i dati presi sperimentalmente differiscono di più di 1 per quelle misure prese con la cerniera  sistemata vicino al centro di massa; mentre sono minori di 1 più il punto di sospensione si allontana dal centro di massa , eccetto che per un caso.
-Il grafico degli scarti in carta semi-logaritmica suggerisce che la differenza tra fit e misure cresca esponenzialmente con l'avvicinarsi della distanza del punto di sospensione e centro di massa a 0.
-Questo fenomeno, contro le ipotesi iniziali discusse nel paragrafo "\textbf{Approssimazioni}", potrebbe essere causato dall'attrito della cerniera; se fosse così, questo si concilierebbe anche col fatto che per punti di sospensione più distanti dal centro di massa non è osservabile (il lavoro della forza di attrito sarebbe lo stesso, ma l'energia cinetica della rotazione è maggiore)  . 
+Il grafico degli scarti in carta semi-logaritmica suggerisce che la differenza tra fit e misure cresca esponenzialmente con l'avvicinarsi della distanza tra il punto di sospensione e quello del centro di massa a 0.
+Questo fenomeno, contro le ipotesi iniziali discusse nel paragrafo "\textbf{Approssimazioni}", potrebbe essere causato dall'attrito della cerniera;tale ipotesi si concilierebbe anche col fatto che per punti di sospensione più distanti dal centro di massa questo fenomeno non è osservabile (il lavoro della forza di attrito sarebbe lo stesso, ma l'energia cinetica della rotazione è maggiore)  . 
 Un'altra spiegazione potrebbe essere la seguente: le misure della distanza tra centro del foro e centro di massa, specialmente per il punto più vicino a quest ultimo, non sono state condotte correttamente.
-Un ulteriore causa potrebbe essere stata che l' ipotesi discussa nel paragrafo "\textbf{Asta omogenea}"  sia erronea.
+Un'ulteriore causa potrebbe essere stata che l' ipotesi discussa nel paragrafo "\textbf{Asta omogenea}"  sia erronea.
 \section{Conclusione}
 Per quanto osservato dal grafico degli scarti, l'equazione (5) è un buon modello predittivo del periodo del pendolo eccetto che per distanze di sospensione troppo vicine al centro di massa.
 \end{document}
