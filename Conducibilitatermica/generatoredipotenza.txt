@@ -1,0 +1,2 @@
+Tensione [V]	Corrente [A]
+10.1		1.70
