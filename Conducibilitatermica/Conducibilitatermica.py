@@ -30,9 +30,9 @@ for i in range (0,15):
     aus=[]
     aus=Tav[i]
     aus_1=[]
-    aus_1=aus[(np.size(aus)-15):]
+    aus_1=aus[(np.size(aus)-5):]
 
-    aus_2=(max(aus_1)-min(aus_1))
+    aus_2=(max(aus_1)-min(aus_1))/(np.sqrt(12))
     # print(aus_2)
     sigma_Temperature_alluminio.append(aus_2)
 
@@ -74,8 +74,8 @@ for i in range (0,20):
     aus=[]
     aus=Trv[i]
     aus_1=[]
-    aus_1=aus[(np.size(aus)-15):]
-    aus_2=(max(aus_1)-min(aus_1))
+    aus_1=aus[(np.size(aus)-5):]
+    aus_2=(max(aus_1)-min(aus_1))/(np.sqrt(12))
     sigma_Temperature_rame.append(aus_2)
 
 
@@ -100,23 +100,25 @@ sezione_rame=np.pi*(diam_rame**2)*0.25#Sezione barra
 
 ##Funzione Fit
 def line(x, m, q):
+    l=m*x+q
 
-    return m * x + q
+    return l
+
 ##Fit Alluminio
-popt_alluminio, pcov_alluminio = curve_fit(line, d_alluminio,Temperature_alluminio,sigma=sigma_Temperature_alluminio)
+popt_alluminio, pcov_alluminio = curve_fit(line,Temperature_alluminio,d_alluminio,sigma=sigma_d_alluminio)
 m_hat_alluminio, q_hat_alluminio = popt_alluminio
 sigma_m_alluminio, sigma_q_alluminio = np.sqrt(pcov_alluminio.diagonal())
 # print(m_hat_alluminio, sigma_m_alluminio, q_hat_alluminio, sigma_q_alluminio)
 print("m alluminio=",m_hat_alluminio)
 ##Fit Rame
-popt_rame, pcov_rame = curve_fit(line, d_rame,Temperature_rame,sigma=sigma_Temperature_rame)
+popt_rame, pcov_rame = curve_fit(line, Temperature_rame,d_rame,sigma=sigma_d_rame)
 m_hat_rame, q_hat_rame = popt_rame
 sigma_m_rame, sigma_q_rame = np.sqrt(pcov_rame.diagonal())
 # print(m_hat_rame, sigma_m_rame, q_hat_rame, sigma_q_rame)
 print("m rame=",m_hat_rame)
 ## Lambda Alluminio e Rame
-lambda_alluminio=(potenza/(m_hat_alluminio*sezione_alluminio))
-lambda_rame=(potenza/(m_hat_rame*sezione_rame))
+lambda_alluminio=(potenza*m_hat_alluminio/sezione_alluminio)
+lambda_rame=(potenza*m_hat_rame/sezione_rame)
 
 print("Lambda alluminio=",lambda_alluminio,"\nLambda rame=",lambda_rame)
 
@@ -125,25 +127,25 @@ print("Lambda alluminio=",lambda_alluminio,"\nLambda rame=",lambda_rame)
 fig, (al1, al2) = plt.subplots(2)
 
 
-al1.errorbar(d_alluminio, Temperature_alluminio,sigma_Temperature_alluminio, sigma_d_alluminio,fmt=".",label="Dati misurati") #Grafico dati
+al1.errorbar(Temperature_alluminio,d_alluminio,  sigma_d_alluminio,sigma_Temperature_alluminio,fmt=".",label="Dati misurati per la barra di alluminio") #Grafico dati
 
 
 
-x = np.linspace(min(d_alluminio), max(d_alluminio), 1000)
-al1.plot(x, line(x, m_hat_alluminio, q_hat_alluminio),label="Fit")# Grafico Fit
+x = np.linspace(min(Temperature_alluminio), max(Temperature_alluminio), 1000)
+al1.plot(x, line(x, m_hat_alluminio, q_hat_alluminio),label="Previsioni dell'algoritmo di Best-Fit")# Grafico Fit
 
 al1.grid(which="both", ls="dashed", color="gray")
-al1.set(xlabel='Posizione [M]', ylabel='Temperatura [$^\\circ$C]')
+al1.set(xlabel='Temperatura [$^\\circ$C]', ylabel='Posizione del foro rispetto a un capo [M]')
 al1.legend()
 
 ##Grafico Alluminio residui
 
-Ra=Temperature_alluminio-line(d_alluminio,m_hat_alluminio,q_hat_alluminio)#Residui dell'alluminio
 
+Ra=d_alluminio-line(np.array(Temperature_alluminio),m_hat_alluminio,q_hat_alluminio)
 
-al2.errorbar(d_alluminio,Ra,sigma_Temperature_alluminio,fmt=".",label="Grafico dei residui") #Scarto ValoriMedi-Fit
+al2.errorbar(Temperature_alluminio,Ra,sigma_d_alluminio,fmt=".",label="Grafico dei residui per la barra di alluminio") #Scarto ValoriMedi-Fit
 
-al2.set(xlabel='Posizione [M]', ylabel='Temperatura [$^\\circ$C]')
+al2.set(xlabel='Differenza di temperatura [$^\\circ$C]', ylabel='Differenza sulla posizione tra misura diretta e best-fit [M]')
 al2.grid(ls="dashed", which="both", color="gray")
 
 al2.legend()
@@ -154,26 +156,30 @@ al2.legend()
 fig, (ar1, ar2) = plt.subplots(2)
 
 
-ar1.errorbar(d_rame, Temperature_rame,sigma_Temperature_rame, sigma_d_rame,fmt=".",label="Dati misurati") #Grafico dati
+ar1.errorbar( Temperature_rame,d_rame,sigma_d_rame,sigma_Temperature_rame, fmt=".",label="Dati misurati per la barra di rame") #Grafico dati
 
 
 
-x = np.linspace(min(d_rame), max(d_rame), 1000)
-ar1.plot(x, line(x, m_hat_rame, q_hat_rame),label="Fit")# Grafico Fit
+x = np.linspace(min(Temperature_rame), max(Temperature_rame), 1000)
+ar1.plot(x, line(x, m_hat_rame, q_hat_rame),label="Previsioni dell'algoritmo di Best-Fit")# Grafico Fit
 
 ar1.grid(which="both", ls="dashed", color="gray")
-ar1.set(xlabel='Posizione [M]', ylabel='Temperatura [$^\\circ$C]')
+ar1.set(xlabel='Temperatura [$^\\circ$C]', ylabel='Posizione del foro rispetto a un capo [M]')
 ar1.legend()
 
 ##Grafico rame residui
 
-Rr=Temperature_rame-line(d_rame,m_hat_rame,q_hat_rame)#Residui dell'rame
+Rr=d_rame-line(np.array(Temperature_rame),m_hat_rame,q_hat_rame)#Residui dell'rame
 
 
-ar2.errorbar(d_rame,Rr,sigma_Temperature_rame,fmt=".",label="Grafico dei residui") #Scarto ValoriMedi-Fit
+ar2.errorbar(Temperature_rame,Rr,sigma_d_rame,fmt=".",label="Grafico dei residui per la barra di rame") #Scarto ValoriMedi-Fit
 
-ar2.set(xlabel='Posizione [M]', ylabel='Temperatura [$^\\circ$C]')
+ar2.set(xlabel='Temperatura [$^\\circ$C]', ylabel='Differenza sulla posizione tra misura diretta e best-fit [M]')
 ar2.grid(ls="dashed", which="both", color="gray")
 ar2.legend()
+
+
+#plt.savefig("posizione_temperatura.pdf")
+
 
 plt.show()
