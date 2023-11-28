@@ -1,10 +1,12 @@
+#cd Documents cd Laboratorio I cd LaboratoryReports cd FallingMass
+
 ## LIBRERIE
 import numpy as np
 from matplotlib import pyplot as plt
 from scipy.optimize import curve_fit
 
 ## DATI
-file_name = r'C:\Users\zoom3\Documents\Laboratorio I\LaboratoryReports\FallingMass\FallingMassDistances.txt'#CAMBIARE DIPENDENTEMENTE DAL DISPOSITIVO
+file_name = r'C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\FallingMass\FallingMassDistances.txt'#CAMBIARE DIPENDENTEMENTE DAL DISPOSITIVO
 
 with open(file_name, 'r') as f:
     lines = f.read()
@@ -34,8 +36,9 @@ popt, pcov = curve_fit(parabola, t, h, sigma=sigma_h)
 a_hat, v0_hat, h0_hat = popt
 sigma_a, sigma_v0, sigma_h0 = np.sqrt(np.diagonal(pcov))
 
+
 ## Scarto ValoriMedi-Fit
-diffFitData=np.abs((h-parabola(t,*popt))) #Scarto ValoriMedi-Fit
+diffFitData=(h-parabola(t,*popt)) #Scarto ValoriMedi-Fit
 
 
 ##Grafici
@@ -56,10 +59,10 @@ leg = ax1.legend()
 ##Grafico 2
 ratio=diffFitData/sigma_h
 
-ax2.plot(t,ratio,"o") #Scarto ValoriMedi-Fit
+ax2.errorbar(t,diffFitData,sigma_h,fmt=".") #Scarto ValoriMedi-Fit
 
 
-ax2.set(xlabel='time[s]', ylabel='Distance in error bars  fit-measured distances')
+ax2.set(xlabel='time[s]', ylabel='Difference between data and best fit algorithm predictions [pixels]')
 ax2.grid(ls="dashed", which="both", color="gray")
 
 
