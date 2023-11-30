@@ -1,0 +1,4 @@
+sfera
+Massa|SigmaMassa|Diametro|SigmaDiametro|NCorpo
+1,2,3,4,1
+

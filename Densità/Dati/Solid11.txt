@@ -1,0 +1,3 @@
+cil
+Massa|SigmaMassa|Diametro|S_diametro|Altezza|S_Altezza|NCorpo
+24.528,0.001,9.96,0.01,37.30,0.02,Ottone

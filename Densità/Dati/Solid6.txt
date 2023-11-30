@@ -1,0 +1,3 @@
+cil
+Massa|SigmaMassa|Diametro|S_diametro|Altezza|S_Altezza|NCorpo
+5.789,0.001,11.96,0.01,19.08,0.01,Alluminio

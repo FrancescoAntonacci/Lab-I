@@ -1,0 +1,3 @@
+ex
+Massa|S_Massa|2Apotema|S_2Apotema|Altezza|S_Altezza|N
+16.474,0.001,9.94,0.01,22.82,0.01,Ottone

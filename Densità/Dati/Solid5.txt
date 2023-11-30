@@ -1,0 +1,3 @@
+para
+Massa|SigmaMassa|A|S_A|B|S_B|C|S_C|NCorpo
+7.766,0.001,8.14,0.01,17.78,0.01,20.07,0.01,Alluminio

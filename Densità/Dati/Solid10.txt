@@ -1,0 +1,3 @@
+para
+Massa|SigmaMassa|A|S_A|B|S_B|C|S_C|NCorpo
+34.725,0.001,9.98,0.01,9.95,0.01,41.50,0.02,Ottone

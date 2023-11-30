@@ -1,0 +1,3 @@
+sfera
+Massa|SigmaMassa|Diametro|SigmaDiametro|NCorpo
+11.889,0.001,14.27,0.01,Acciaio
