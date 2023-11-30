@@ -12,7 +12,7 @@ sigma_potenza=((sigma_tensione/tensione)+(sigma_corrente/corrente))*potenza
 ##Temperature Alluminio
 
 
-path0 = r'C:/Users/zoom3/Documents/Laboratorio I/LaboratoryReports/Conducibilitatermica/cond_231123/alluminio/'
+path0 = r'C:/Users/zoom3/Documents/Unipi/Laboratorio I/LaboratoryReports/Conducibilitatermica/cond_231123/alluminio/'
 Tav = []
 for i in range(1,16):
     i=str(i)
@@ -42,19 +42,22 @@ print("Sigma temperature alluminio=",sigma_Temperature_alluminio)
 
 ##Dimesioni alluminio Alluminio
 
-path1 = r'C:/Users/zoom3/Documents/Laboratorio I/LaboratoryReports/Conducibilitatermica/distanzafori_alluminio.txt'
+path1 = r'C:/Users/zoom3/Documents/Unipi/Laboratorio I/LaboratoryReports/Conducibilitatermica/distanzafori_alluminio.txt'
 
 d_alluminio=np.loadtxt(path1, unpack = True)
 diametro_fori_alluminio=0.0041
 sigma_d_alluminio=np.full(d_alluminio.shape, (diametro_fori_alluminio/2))
 
 diam_alluminio=0.025
-sezione_alluminio=np.pi*diam_alluminio**2/4#Sezione barra
+sigma_diam_alluminio=0.001
+
+sezione_alluminio=np.pi*diam_alluminio**2/4 #Sezione barra
+sigma_sezione_alluminio=(2*(sigma_diam_alluminio/diam_alluminio))*sezione_alluminio
 
 ##Temperature Rame
 
 
-path2 = r'C:/Users/zoom3/Documents/Laboratorio I/LaboratoryReports/Conducibilitatermica/cond_231123/rame/'
+path2 = r'C:/Users/zoom3/Documents/Unipi/Laboratorio I/LaboratoryReports/Conducibilitatermica/cond_231123/rame/'
 Trv = []
 for i in range(1,21):
     i=str(i)
@@ -85,16 +88,20 @@ print("Sigma temperature rame=",sigma_Temperature_rame)
 # print(Temperature_rame,np.size(Temperature_rame),sigma_Temperature_rame,np.size(sigma_Temperature_rame))
 ##Dimesioni alluminio Rame
 
-path3 = r'C:/Users/zoom3/Documents/Laboratorio I/LaboratoryReports/Conducibilitatermica/distanzafori_rame.txt'
+path3 = r'C:/Users/zoom3/Documents/Unipi/Laboratorio I/LaboratoryReports/Conducibilitatermica/distanzafori_rame.txt'
 
 d_rame=np.loadtxt(path3, unpack = True)
 
 diam_rame=0.025
+sigma_diam_rame=0.001
 
 diametro_fori_rame=0.0041
 sigma_d_rame=np.full(d_rame.shape, (diametro_fori_rame/2))
 
-sezione_rame=np.pi*(diam_rame**2)*0.25#Sezione barra
+sezione_rame=np.pi*(diam_rame**2)*0.25
+sigma_sezione_rame=(2*(sigma_diam_rame/diam_rame))*sezione_rame
+
+#Sezione barra
 #
 # print(d_rame,np.size(d_rame),sigma_d_rame,np.size(sigma_d_rame))
 
@@ -119,8 +126,10 @@ print("m rame=",m_hat_rame)
 ## Lambda Alluminio e Rame
 lambda_alluminio=(potenza*m_hat_alluminio/sezione_alluminio)
 lambda_rame=(potenza*m_hat_rame/sezione_rame)
+sigma_lambda_alluminio= np.sqrt((sigma_potenza/potenza)**2+(sigma_m_alluminio/m_hat_alluminio )+(sigma_sezione_alluminio/sezione_alluminio)**2)*lambda_alluminio
+sigma_lambda_rame= np.sqrt((sigma_potenza/potenza)**2+(sigma_m_rame/m_hat_rame )+(sigma_sezione_rame/sezione_rame)**2)*lambda_rame
 
-print("Lambda alluminio=",lambda_alluminio,"\nLambda rame=",lambda_rame)
+print("Lambda alluminio=",lambda_alluminio," sigma_lambda_alluminio=",sigma_lambda_alluminio,"\nLambda rame=",lambda_rame," sigma_lambda_rame=",sigma_lambda_rame)
 
 
 ## Grafico Alluminio
