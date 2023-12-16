@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{float}
+\title{Calcolo della densità lineare}
+\author{Di Meglio Alessandro & Francesco Antonacci}
+\date{30.11.2023}
+
+
+\begin{document}
+
+\maketitle
+
+
+\section{Scopo dell'esperienza}
+Determinare la densità lineare di poliedri e sfere di varie dimensioni e materiali.
+\section{Cenni teorici}
+La densità lineare di un oggetto è data dalla seguente equazione:
+\(\rho = \frac{m}{V}\)
+dove m è la massa e V è il volume.
+Ci si si aspetta che la densità lineare sia costante $$\forall m, \forall V.$$
+Il fit, quindi, deve essere rappresentato da una linea retta.
+
+
+
+\section{Apparato strumentale}
+Gli strumenti utilizzati per l'esperienza sono:
+\subsection{Strumenti per la misurazione di lunghezze}
+-\textbf{Calibro} \textbf{ventesimale} con risoluzione 0.05mm \\
+-\textbf{Calibro} \textbf{Palmer} con risoluzione di 0.01mm
+\subsection{Strumenti per la misurazione delle masse}
+-\textbf{Bilancia} \textbf{di} \textbf{precisione} con risoluzione di 1mg
+\subsection{\textbf{Elementi} \textbf{da} \textbf{misurare}}
+Come detto in precedenza, non tutte le masse sono dello stesso materiale. 
+Gli elementi su cui sono state fatte le misure sono i seguenti, divisi per materiale. 
+\subsection{\textbf{Alluminio}}
+- 2 parallelepipedi \\
+- 2 cilindri \\
+
+\subsection{Ottone}
+- 2 cilindri \\
+- 1 cilindro a base esagonale \\
+- 1 parallelepipedo \\
+\subsection{Acciaio}
+- 5 sfere
+
+
+
+\section{Descrizione delle misure}
+Per quasi tutte le misurazioni di lunghezza effettuate, si è utilizzato il calibro Palmer per avere una precisione maggiore ed un errore minore su ogni misura. Solo due misure sono state effettuate con il calibro ventesimale in quanto la lunghezza da effettuare era maggiore della misura massima misurabile dal calibro Palmer. Le due misure in questione sono l'altezza del cilindro di e di un parallelepipedo entrambi di ottone.
+Riportiamo con una tabella le misure effettuate:
+\subsection{Dati delle misurazioni delle masse di alluminio}
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        Oggetto & Massa (mg) & Lato 1 (mm) & Lato 2 (mm) & Lato 3 (mm) \\
+        \hline
+        Parallelepipedo & $4.853 \pm 0.001$ & $10.05 \pm 0.01$ & $10.04 \pm 0.001$ & $18.43 \pm 0.01$ \\
+        Parallelepipedo 2 & $7.766 \pm 0.001$ & $8.14 \pm 0.01$ & $17.78 \pm 0.01$ & $20.07 \pm 0.01$ \\
+        Cilindro & $5.789 \pm 0.001$ & $11.96 \pm 0.01$ & $19.08 \pm 0.01$ & \\
+        Cilindro 2 & $15.777 \pm 0.001$ & $18.91 \pm 0.01$ & $19.80 \pm 0.01$ & \\
+        \hline
+    \end{tabular}
+    \caption{Tabella con i dati dei corpi}
+    \label{tab:dati_corpi}
+\end{table}
+\subsection{Dati delle misurazioni delle masse di ottone}
+
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        Oggetto & Massa (mg) & Lato 1 (mm) & Lato 2 (mm) & Lato 3 (mm) \\
+        \hline
+        Cilindro 1 & $10.764 \pm 0.001$ & $9.96 \pm 0.01$ & $16.41 \pm 0.01$ & \\
+        Cilindro 2 & $24.528 \pm 0.001$ & $9.96 \pm 0.01$ & $37.30 \pm 0.02$ & \\
+        Parallelepipedo & $34.725 \pm 0.001$ & $9.98 \pm 0.01$ & $9.95 \pm 0.01$ & $41.50 \pm 0.02$ \\
+        Cilindro esagonale & $16.474 \pm 0.001$ & $9.94 \pm 0.01$ & $22.82 \pm 0.01$ & \\
+        \hline
+    \end{tabular}
+    \caption{Tabella con i dati dei corpi}
+    \label{tab:dati_corpi_aggiornati}
+\end{table}
+\subsection{Dati delle misurazioni delle masse in acciaio}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Nome & Massa(mg) & Raggio (mm) \\
+        \hline
+        Sfera 1 & $3.524 \pm 0.001$ & $9.52 \pm 0.01$ \\
+        Sfera 2 & $8.359 \pm 0.001$ & $12.69 \pm 0.01$ \\
+        Sfera 3 & $11.889 \pm 0.001$ & $14.27 \pm 0.01$ \\
+        Sfera 4 & $28.193 \pm 0.001$ & $19.03 \pm 0.01$ \\
+        Sfera 5 & $44.821 \pm 0.001$ & $22.20 \pm 0.01$ \\
+        \hline
+    \end{tabular}
+    \caption{Tabella con gli ultimi dati delle sfere}
+    \label{tab:dati_sfere}
+\end{table}
+\section{Analisi dei dati}
+
+\section{Conclusioni}
+Il fit rispecchia l'ipotesi espressa nei \textbf{cenni} \textbf{teorici} (2)
+\end{document}
