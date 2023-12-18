@@ -24,10 +24,10 @@ def catenary(x, a, c, x0):
 file_path = r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Catenary\catenary.txt"
 ##  Parabola
 
-def parabola(x, a, b, c):
-    '''Model of a parabola.
-    '''
-    return a*x*x+ b*x +c
+# def parabola(x, a, b, c):
+#     '''Model of a parabola.
+#     '''
+#     return a*x*x+ b*x +c
 ##Data
 
 x, y = np.loadtxt(file_path, unpack=True, delimiter=",")
@@ -50,18 +50,16 @@ y=y*(ky)
 ##Best Fit-Algorythm for the Catenary
 
 p0=(-480*ky, 2016*ky,1223*kx)
-print(p0)
-
 popt, pcov = curve_fit(catenary, x, y, p0)
 a_hat, c_hat, x0_hat = popt
 sigma_a, sigma_c, sigma_x0 = np.sqrt(pcov.diagonal())
-print(a_hat, sigma_a, c_hat, sigma_c, x0_hat, sigma_x0)
+print("a_hat=",a_hat,"m\n sigma_a=", sigma_a,"m\n c_hat=", c_hat,"m\n sigma_c=", sigma_c,"m\n x0_hat=", x0_hat,"m\n sigma_x0=", sigma_x0,"m")
 
 ##Best Fit-Algorythm for the Parabola
-popt_p, pcov_p = curve_fit(parabola, x, y,p0=(-1000,1000 ,2000))
-ap_hat, bp_hat, cp_hat = popt_p
-sigma_ap, sigma_bp, sigma_cp = np.sqrt(pcov_p.diagonal())
-print(ap_hat, sigma_ap, bp_hat, sigma_bp, cp_hat, sigma_cp)
+# popt_p, pcov_p = curve_fit(parabola, x, y,p0=(-1000,1000 ,2000))
+# ap_hat, bp_hat, cp_hat = popt_p
+# sigma_ap, sigma_bp, sigma_cp = np.sqrt(pcov_p.diagonal())
+# print(ap_hat, sigma_ap, bp_hat, sigma_bp, cp_hat, sigma_cp)
 
 
 ##Plots Catenary
