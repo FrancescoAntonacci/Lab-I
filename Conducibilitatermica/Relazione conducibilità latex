@@ -56,5 +56,5 @@ Per quanto riguarda l'errore si è utilizzata come riferimento la seguente relaz
 $$\sigma_{y} \gg \left| \frac{dy}{dx} \right| \cdot \sigma_{x}$$
 come evidente dal fit e utilizzando questa relazione, si è disposto l'errore legato alla misura della distanza fra i fori sulle y mentre l'errore legato all'errore sulla misurazione della temperatura sulle x ottenuto facendo la distrubuzione lineare fra il minimo valore  e il massimo valore osservato dalle ultime misure del termistore, meno soggette ad oscillazioni.
 \section{\textbf{Conclusione}}
-Il fit rispecchia le'ipotesi espressa nei cenni teorici. 
+Il fit rispecchia le ipotesi espresse nei cenni teorici. 
 \end{document}
