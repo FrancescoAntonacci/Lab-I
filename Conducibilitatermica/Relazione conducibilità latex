@@ -54,6 +54,17 @@ Di seguito riportiamo i fit ed i relativi residui \\
 -Rame: \\
 Per quanto riguarda l'errore si è utilizzata come riferimento la seguente relazione fra gli errori sui diversi assi cartesiani:
 $$\sigma_{y} \gg \left| \frac{dy}{dx} \right| \cdot \sigma_{x}$$
+\begin{center}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    Materiale & $\lambda$ [W/(m$\cdot$C)] & $\sigma_{\lambda}$ [W/(m$\cdot$C)] \\
+    \hline
+    Alluminio & 334.87 & 65.02 \\
+    \hline
+    Rame & 582.62 & 122.24 \\
+    \hline
+  \end{tabular}
+\end{center}
 come evidente dal fit e utilizzando questa relazione, si è disposto l'errore legato alla misura della distanza fra i fori sulle y mentre l'errore legato all'errore sulla misurazione della temperatura sulle x ottenuto facendo la distrubuzione lineare fra il minimo valore  e il massimo valore osservato dalle ultime misure del termistore, meno soggette ad oscillazioni.
 \section{\textbf{Conclusione}}
 Il fit rispecchia le ipotesi espresse nei cenni teorici. 
