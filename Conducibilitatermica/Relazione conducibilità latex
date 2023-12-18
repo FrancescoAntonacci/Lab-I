@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{Studio della conducibilità termica di due aste forate metalliche}
+\author{Di Meglio - Antonacci}
+\date{23 novembre 2023}
+
+\begin{document}
+
+\maketitle
+
+\section{\textbf{Scopo} \textbf{dell'esperienza}}
+Misurazione della conducibilità termica di due cilindri metallici forati, rispettivamente di rame e alluminio.
+\section{\textbf{Cenni} \textbf{teorici}}
+In questa sezione verranno descritti gli aspetti teorici dell'esperienza, ovvero ciò che ci aspettiamo succeda.
+
+Sia considerato un flusso di calore, $$ W= \frac {dQ} {dt} $$ ovvero la quantità calore per unità di tempo. Si consideri la situazione in cui il sistema interno alla sbarra sia a calore costante. Siamo in una condizione di equilibrio termico. Essendo la sbarra forata, è possibile calcolare il flusso di calore relativo alla sezione considerata: indichiamo con T la temperatura, con S la sezione del foro, con x la posizione lungo la barra e con $\lambda$ la formula: $$W = -\frac{\lambda \cdot S \cdot \Delta T}{\Delta x}
+$$
+E' quindi previsto misurare il valore del coefficiente $$\lambda$$ delle sbarre citate precedentemente.
+Inoltre in assenza di calore, per stimare il coefficiente di conducibilità, si tiene conto anche della relazione che lega il calore ceduto dalle resistente per effetto joule da cui:
+$$W= \frac{VI}{2}$$
+
+
+
+
+
+\section{\textbf{Apparato} \textbf{sperimentale}}
+Per l'esperimento si sono utilizzati i seguenti strumenti:
+\subsection{Strumenti per la misurazione di lunghezze}
+-Metro a nastro con risoluzione di un millimetro \\
+-Calibro ventesimale con risoluzione di un ventesimo di millimetro
+\subsection{Termistori}
+Il termistore è uno strumento che permette allo sperimentatore di valutare la variazione di temperatura nei diversi fori dell'asta metallica, nell'esperimento ne sono stati utilizzati due in modo da poterne usare uno per la misurazione della temperatura del singolo foro e uno per verificare che la temperatura non variasse rispetto alle piccole oscillazioni di voltaggio e di intensità di corrente del generatore. La sua risoluzione è di 0.1 C°
+\subsection{Generatore}
+Il generatore utilizzato ha lo scopo di riscaldare l'olio siliconico presente all'interno delle aste metalliche. La risoluzione dello strumento è di ±0.1 V e di ±0.1 A.
+\subsection{Supporto}
+L'apparato slerimentale composto dai tubi metallici è disposto su uno strato isolante.
+\subsection{Componente idraulica}
+Ad una estremità delle aste è presente un tubo nel quale scorre dell'acqua che crea un gradiente termico all'interno di esse.
+\section{\textbf{Descrizione} \textbf{delle} \textbf{misure}}
+Durante l'esperienza si sono prese le misure relative alle lunghezze dei tubi e alla distanza fra i diversi fori. Di rilevante importanza è stata la possibilità di poter rilevare costantemente i valori numerici relativi al voltaggio e all'amperaggio del generatore che, per la relazione definita nella sezione teorica, sono quantità necessarie per il calcolo del flusso di calore. Durante l'esperienza sono rimaste ambo costanti: \\ \\
+\begin{tabular}{|c|c|}
+  \hline
+  Tensione [V] & Corrente [A] \\
+  \hline
+  10.1 & 1.70 \\
+  \hline
+\end{tabular}\\ \\ \\
+Successivamente si è passati alla rilevazione vera e propria delle temperature all'interno dei tubi attraverso i vari fori. Per la misurazione sono stati utilizzati due termistori, prima di misurare definitivamente si è preferito considerare la differenza dei due strumenti, infatti anche se disposti nello stesso foro per diverso tempo, la differenza a schermo della temperatura misurata dai due termistori era diversa ma costante. 
+Per ogni misurazione si sono presi i dati di uno stesso termistore, disposto mano mano nei diversi fori, il secondo termistore, invece, è stato utilizzato come strumento di controllo. Essendo infatti disposto sempre nell'ultimo foro, era possibilile osservare che non ci fossero cali di di amperaggio o voltaggio.
+\section{\textbf{Analisi} \textbf{dei} \textbf{dati}}
+Di seguito riportiamo i fit ed i relativi residui \\
+-Alluminio: \\
+-Rame: \\
+Per quanto riguarda l'errore si è utilizzata come riferimento la seguente relazione fra gli errori sui diversi assi cartesiani:
+$$\sigma_{y} \gg \left| \frac{dy}{dx} \right| \cdot \sigma_{x}$$
+come evidente dal fit e utilizzando questa relazione, si è disposto l'errore legato alla misura della distanza fra i fori sulle y mentre l'errore legato all'errore sulla misurazione della temperatura sulle x ottenuto facendo la distrubuzione lineare fra il minimo valore  e il massimo valore osservato dalle ultime misure del termistore, meno soggette ad oscillazioni.
+\section{\textbf{Conclusione}}
+Il fit rispecchia le'ipotesi espressa nei cenni teorici. 
+\end{document}
