@@ -24,13 +24,13 @@ def vol_cil(d,h,s_d,s_h):
     return v,s_v
 def vol_ex(da,h,s_da,s_h):
     v=np.tan(np.pi/6)*(1.5)*(da**2)*h
-    s_v=v*np.sqrt((2*(da/s_da))**2+((s_h/h)**2))
+    s_v=v*np.sqrt(((2*(da/s_da)))**2+((s_h/h)**2))
     return v,s_v
 
 
 def dens(m,v,s_m,s_v):
     ro=(m/v)
-    s_ro=((s_m/m)+(s_v/v))*ro
+    s_ro=np.sqrt((s_m/m)**2+(s_v/v)**2)*ro
     return ro,s_ro
 
 
@@ -143,10 +143,10 @@ ac_s_masse=[acsolido12.s_m,acsolido13.s_m,acsolido14.s_m,acsolido15.s_m,acsolido
 ac_vol=[acsolido12.v,acsolido13.v,acsolido14.v,acsolido15.v,acsolido16.v]
 ac_s_vol=[acsolido12.s_v,acsolido13.s_v,acsolido14.s_v,acsolido15.s_v,acsolido16.s_v]
 
-ot_masse=[otsolido8.m,otsolido9.m,otsolido10.m,otsolido11.m]
-ot_s_masse=[otsolido8.s_m,otsolido9.s_m,otsolido10.s_m,otsolido11.s_m]
-ot_vol=[otsolido8.v,otsolido9.v,otsolido10.v,otsolido11.v]
-ot_s_vol=[otsolido8.s_v,otsolido9.s_v,otsolido10.s_v,otsolido11.s_v]
+ot_masse=[otsolido8.m,otsolido10.m,otsolido11.m]
+ot_s_masse=[otsolido8.s_m,otsolido10.s_m,otsolido11.s_m]
+ot_vol=[otsolido8.v,otsolido10.v,otsolido11.v]
+ot_s_vol=[otsolido8.s_v,otsolido10.s_v,otsolido11.s_v]
 ## Funzione dell'algoritmo di Best- Fit
 def line(x, m, q):
     return m * x + q
@@ -174,9 +174,9 @@ sigma_m_ot, sigma_q_ot = np.sqrt(pcov_ot.diagonal())
 ro_ot=1/m_hat_ot
 s_ro_ot=(sigma_m_ot/(m_hat_ot))*ro_ot
 
-print("Densità alluminio=",ro_al,"Errore di misura densità alluminio=",s_ro_al,"\nQ_hat e relativo errore", q_hat_al, sigma_q_al)
-print("Densità acciaio=",ro_ac,"Errore di misura densità acciaio=",s_ro_ac,"\nQ_hat e relativo errore", q_hat_ac, sigma_q_ac)
-print(r"Densità ottone=",ro_ot,"Errore di misura densità ottone=",s_ro_ot,"\nQ_hat e relativo errore", q_hat_ot, sigma_q_ot)
+print("Densità alluminio=",ro_al,"Errore di misura densità alluminio=",s_ro_al,"\nQ_hat e relativo errore", q_hat_al, sigma_q_al,"m_hat_al e s_m_al=",m_hat_al,sigma_m_al )
+print("Densità acciaio=",ro_ac,"Errore di misura densità acciaio=",s_ro_ac,"\nQ_hat e relativo errore", q_hat_ac, sigma_q_ac,"m_hat_ac e s_m_ac=",m_hat_ac,sigma_m_ac)
+print(r"Densità ottone=",ro_ot,"Errore di misura densità ottone=",s_ro_ot,"\nQ_hat e relativo errore", q_hat_ot, sigma_q_ot,"m_hat_ot e s_m_ot=",m_hat_ot,sigma_m_ot)
 
 ## Algoritmo di Best Fit-Legge di potenza
 r_spheres=[acsolido12.d/2,acsolido13.d/2,acsolido14.d/2,acsolido15.d/2,acsolido16.d/2]
@@ -185,10 +185,27 @@ m_spheres=[acsolido12.m,acsolido13.m,acsolido14.m,acsolido15.m,acsolido16.m]
 s_m_spheres=[acsolido12.s_m,acsolido13.s_m,acsolido14.s_m,acsolido15.s_m,acsolido16.s_m]
 
 
-pot_popt, pot_pcov = curve_fit(power_law, r_spheres, m_spheres)
+pot_popt, pot_pcov = curve_fit(power_law,m_spheres,r_spheres)
 norm_hat, index_hat = pot_popt
 sigma_norm, sigma_index = np.sqrt(pot_pcov.diagonal())
-print("\nDensitàAcciaio*4*Pi/3(base)[m]=",norm_hat,"Sigma_base[m]=", sigma_norm, "Esponente=",index_hat, "Sigma_esponente=",sigma_index)
+print("coefficiente[m^3/kg]=",norm_hat,"coefficiente[m^3/kg]=", sigma_norm, "Esponente=",index_hat, "Sigma_esponente=",sigma_index)
+###         GRAFICI
+###         GRAFICI
+###         GRAFICI
+##Grafico massa-raggio
+plt.figure("Grafico massa-raggio")
+plt.errorbar( m_spheres,r_spheres,s_r_spheres,s_m_spheres,  fmt=".")
+
+x = np.linspace(min(m_spheres), max(m_spheres), 100)
+plt.plot(x, power_law(x, norm_hat, index_hat))
+plt.xscale("log")
+plt.yscale("log")
+plt.ylabel("Raggio [m]")
+plt.xlabel("Massa [Kg]")
+plt.grid(which="both", ls="dashed", color="gray")
+
+
+
 
 ## Grafico
 
@@ -227,16 +244,6 @@ plt.xlabel("Massa [kg]")
 plt.grid(which="both", ls="dashed", color="gray")
 
 
-plt.figure("Grafico massa-raggio")
-plt.errorbar(r_spheres, m_spheres, s_m_spheres, s_r_spheres, fmt=".")
-
-x = np.linspace(min(r_spheres), max(r_spheres), 100)
-plt.plot(x, power_law(x, norm_hat, index_hat))
-plt.xscale("log")
-plt.yscale("log")
-plt.xlabel("Raggio [m]")
-plt.ylabel("Massa [Kg]")
-plt.grid(which="both", ls="dashed", color="gray")
 
 ## Grafici dei Residui
 
@@ -266,6 +273,29 @@ plt.errorbar(ot_masse,Rot,ot_s_vol,fmt=".",label=" ") #Scarto ValoriMedi-Fit
 plt.grid(ls="dashed", which="both", color="gray")
 plt.xlabel("Massa[Kg]")
 plt.ylabel("Differenza previsione del fit-misure del volume[m$^3$]")
+
+##Grafico unificato
+
+plt.figure("Grafico unificato")
+
+x1 = np.linspace(min(al_masse), max(al_masse), 1000)
+x2 = np.linspace(min(ac_masse), max(ac_masse), 1000)
+x3 = np.linspace(min(ot_masse), max(ot_masse), 1000)
+
+plt.errorbar(al_masse, al_vol, al_s_vol, al_s_masse,fmt=".",label="Masse di alluminio") #Plot dati
+plt.plot(x1, line(x1, m_hat_al, q_hat_al)) #plot Fit
+
+plt.errorbar(ac_masse, ac_vol, ac_s_vol, ac_s_masse,fmt=".",label="Masse di acciaio")
+plt.plot(x2, line(x2, m_hat_ac, q_hat_ac))
+
+plt.errorbar(ot_masse, ot_vol, ot_s_vol, ot_s_masse,fmt=".",label="Masse di ottone")
+plt.plot(x3, line(x3, m_hat_ot, q_hat_ot))
+
+plt.grid(which="both", ls="dashed", color="gray")
+
+plt.ylabel("Volume [m$^3$]")
+plt.xlabel("Massa [kg]")
+plt.legend()
 
 plt.show()
 
