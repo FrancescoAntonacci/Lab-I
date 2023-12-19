@@ -1,0 +1,12 @@
+These are the measures taken from the data extrapolation!
+
+h [m] = [0.77633815 0.57272426 0.44769103 0.35562826 0.2883419  0.24492645
+ 0.20845308 0.1786764  0.15462921 0.13470414 0.11909734 0.10554116
+ 0.09361622]
+h0_hat [m]= 0.893 
+sigma_h0[m]= 0.021 
+gamma_hat= 0.753 
+sigma_gamma= 0.008 
+c_hat[m]= 0.079 
+sigma_c[m]= 0.006
+h_measured[m]= 0.75 s_h_measured[m]= 0.01
