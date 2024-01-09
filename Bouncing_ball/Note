@@ -1,1 +1,40 @@
-This experiment was anything but trivial!
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{Valutazione sperimentale per determinare la dinamica dei rimbalzi di una sfera}
+\author{Alessandro Di Meglio -Francesco Angelo Fabiano Antonacci}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Scopo dell'esperienza}
+Lo scopo dell'esperienza è quello di valutare la dinamica dei rimbalzi di una sfera lasciata cadere su una superficie rigida capace di attutire in maniera uniforme l'energia della sfera ad ogni rimbalzo
+\section{Cenni teorici}
+Si intende verificare che l'altezza di una pallina n rimbalzi rispetti la seguente formula:\\
+
+$$ h_{n} = h_{0} \cdot \gamma^{n} $$
+L'altezza della pallina dopo n rimbalzi è uguale all'altezza iniziale moltiplicata per un coefficiente gamma, che rappresenta la frazione di energia dispersa nel rimbalzo, elevato ad n.
+Inoltre è possibile determinare l'altezza raggiunta fra 2 rimbalzi consecutivi come segue:
+$$ h_{n} = \frac{1}{8} g[(t_{n} - t_{n-1})^2] $$
+
+
+
+
+\section{Apparato strumentale}
+
+
+
+
+
+
+
+\section{Descrizione delle misure}
+
+
+
+\section{Analisi dei dati}
+\section{Conclusioni}
+
+\end{document}
