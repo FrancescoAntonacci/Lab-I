@@ -1,0 +1,122 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{Valutazione sperimentale di una legge sulle altezze massime dei rimbalzi di una sfera}
+\author{Alessandro Di Meglio \\Francesco Angelo Fabiano Antonacci}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Scopo dell'esperienza}
+Lo scopo dell'esperienza è quello di valutare l'accuratezza di una legge nel modellizzare l'altezza raggiunta in rimbalzi successivi da una sfera lasciata cadere.
+
+
+\section{Cenni teorici}
+Assumiamo che ciascun rimbalzo assorba la stessa frazione di energia.
+L'altezza massima di ogni rimbalzo seguirà la seguente equazione:
+\begin{equation}
+h_{n} = h_{0}  \gamma^{n}
+\label{h(n)}
+\end{equation}
+Dove $h_0$ è il numero di rimalzi,$ \gamma$ è il rapporto tra due altezza massime successive, n è il numero di rimbalzi. 
+Questa è la legge che in questa relazione ci si prefigge di verificare.
+
+Inoltre è possibile determinare l'altezza raggiunta fra 2 rimbalzi consecutivi come segue:
+
+\begin{equation}
+ 	h_{n} = \frac{1}{8} g[(t_{n} - t_{n-1})^2] 
+		\label{h2(n)}
+\end{equation}
+
+\section{Apparato strumentale}
+
+\subsection{Misure di tempi}
+Le misure di tempi sono state effettuate mediante uno smartphone con risoluzione di un 0.1ms .
+Ciononostante, si è stimato che l'incertezza sulle misure dei tempi  $\sigma_t=1.5$ [ms]  fosse la metà del tempo di contatto .
+Per l'incertezza sulle differenze dei tempi(dt) in cui sono avventuti gli urti è stata usata la seguente equazione:  $\sigma_{dt}=\sigma_t\sqrt{2}$.
+
+
+\subsection{Misure di lunghezza}
+Le misure di lunghezza sono state prese con un metro a nastro con risoluzione di un millimetro.
+Per calcolare le incertezza($\sigma_h$) delle altezze massime stimate(h) è stata usata la seguente equazione:
+\begin{equation}
+	\sigma_{h} = \frac{\sigma_{dt} h  2 \sqrt{2}   } {dt}
+\end{equation}
+
+
+\subsection{Materiale}
+Una biglia di acciaio è stato l'oggetto con cui cercare di verificare la legge.
+
+
+\section{Descrizione delle misure}
+
+\subsection{Misura dei periodi dei rimbalzi}
+E'stata misurata l'altezza del supporto.
+E' stata avviata una registrazione audio dei rimbalzi con lo smartphone. 
+E' stata lasciata cadere la biglia da un supporto.
+
+\subsection{Misura altezza iniziale}
+
+L'altezza iniziale è stata misurata con un metro a nastro.
+La relativa incertezza è stata presa di 5 millimetri anziché di 1 in quanto non è stato garatito un rilascio perfetto.
+
+\centering
+
+		$h_{0} (misurata)=0.373\pm0.005$ m
+
+\raggedright
+
+\section{Analisi dei dati}
+
+
+
+
+\subsection{Algoritmo di best fit}
+Il numero di rimbalzi non ha incertezza, pertanto  è stato usato come variabile di incertezza trascurabile per l'algoritmo di best-fit.
+La funzione su cui fare il fit utilizzata non è stata (\ref{h(n)}) ma:
+
+\begin{equation}
+	h_{n} = h_{0}  \gamma^{n}+c
+		\label{h(n)+c}
+\end{equation}
+
+Dove c è una costante, utile per scovare un potenziale errore sistematico, che desideriamo sia quanto più vicino a 0  possibile.
+
+\begin{figure}
+	\includegraphics[width=\textwidth]{Altezza_dei_rimbalzi.png}
+		\caption{Altezze stiamate mediante l'occorrenza degli urti e previsioni di (4) con i parametri dati dall'algoritmo di best-fit}
+
+\end{figure}
+\begin{figure}
+	\includegraphics[width=\textwidth]{Grafico_dei_residui.png}
+		\caption{Grafico dei residui}
+
+\end{figure}
+
+
+\section{Conclusioni}
+
+\begin{table}
+\begin{tabular}{|c|c|c|c|}
+\hline
+		$h_{0}$ (misura diretta) [m]& $h_{0}$ (algoritmo di best-fit) [m]& $\gamma$ &c (algoritmo di best-fit) [m]\\
+\hline
+		$0.373\pm0.005$ & $0.364\pm0.009$ & $0.741\pm0.008$ & $0.001\pm0.002$\\
+\hline
+
+	
+\end{tabular}
+	\caption{Risultati dell'algoritmo di best-fit}
+\end{table}
+Dai risultati dell'algoritmo di best-fit si osserva che: il parametro c è assai inferiore all'incertezza dell'altezza stimata e la sua incertezza fa sì che c=0 sia possibile;l'altezza iniziale misurata e quella stimata sono distanti non più di una barra di errore: le due sono compatibili.
+Inoltre  da (Figure 2) si osserva che le previsioni non si discostano dai dati stimati per non più di due barre di errore.
+Di conseguenza l'equazione (\ref{h(n)}) è compatibile con quanto è stato misurato.
+
+
+
+
+
+
+\end{document}
