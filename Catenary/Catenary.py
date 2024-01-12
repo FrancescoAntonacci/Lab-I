@@ -3,17 +3,21 @@ import matplotlib
 from matplotlib import pyplot as plt
 from scipy.optimize import curve_fit
 
+## Mother Fucker func
 
+def onclick(event):
+    print(round(event.xdata),",",round(event.ydata))
 
 ## Image
-file_path = r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Catenary\catenary.jpg"
+file_path = r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Catenary\catenary1.jpg"
 
-plt.figure("Immagine originale")
+fig=plt.figure("Immagine originale")
 img = matplotlib.image.imread(file_path)
 plt.xlabel("x [pixels]")
 plt.ylabel("y [pixels]")
 plt.imshow(img)
-
+plt.show()
+cid = fig.canvas.mpl_connect('button_press_event', onclick)
 
 ## Catenary
 def catenary(x, a, c, x0):
@@ -32,8 +36,7 @@ file_path = r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Cat
 
 x, y = np.loadtxt(file_path, unpack=True, delimiter=",")
 
-sigma_x = 5*kx
-sigma_y = 5*ky
+
 
 dx=1.750
 s_dx=0.005
@@ -46,7 +49,8 @@ ky=dy/(max(y)-min(y))
 x=x*(kx)
 y=y*(ky)
 
-
+sigma_x = 5*kx
+sigma_y = 5*ky
 ##Best Fit-Algorythm for the Catenary
 
 p0=(-480*ky, 2016*ky,1223*kx)
@@ -61,24 +65,38 @@ print("a_hat=",a_hat,"m\n sigma_a=", sigma_a,"m\n c_hat=", c_hat,"m\n sigma_c=",
 # sigma_ap, sigma_bp, sigma_cp = np.sqrt(pcov_p.diagonal())
 # print(ap_hat, sigma_ap, bp_hat, sigma_bp, cp_hat, sigma_cp)
 
+##Residuals computation
+
+res = y - catenary(x, a_hat, c_hat, x0_hat)
+
+##Chi-Square test
+
+chi_square=sum((res/sigma_y)**2)
+print("Chi_square=",chi_square)
 
 ##Plots Catenary
-fig, (c1, cr1) = plt.subplots(2)
+plt.figure("Punti e grafico dei residui ")
 
-c1.errorbar(x, y, sigma_y, fmt=".",label="Points taken")
+plt.errorbar(x, y, sigma_y, fmt=".",label="Punti misurati")
 
 x1=np.linspace(min(x),max(x),10000)
 
-c1.plot(x1, catenary(x1, a_hat, c_hat, x0_hat),label="Best-Fit algorithm for a catenary")
-c1.set(xlabel='$x [m]$', ylabel='$ y[m]$')
-c1.legend()
+plt.plot(x1, catenary(x1, a_hat, c_hat, x0_hat),label="Best-Fit algorithm for a catenary")
+plt.grid(True)
+
+# plt.set(xlabel='$x [m]$', ylabel='$ y[m]$')
+plt.legend()
 
 
 ##Residuals plots Catenary
-res = y - catenary(x, a_hat, c_hat, x0_hat)
-cr1.errorbar(x, res, sigma_y, fmt=".",label="Residuals")
-cr1.set(xlabel='$x [m]$', ylabel='$ y[m]$')
-cr1.legend()
+plt.figure("Residui")
+
+
+
+plt.grid(True)
+plt.errorbar(x, res, sigma_y, fmt=".",label="Residuals")
+# plt.set(xlabel='$x [m]$', ylabel='$ y[m]$')
+plt.legend()
 
 
 # ##Plots Parabola
