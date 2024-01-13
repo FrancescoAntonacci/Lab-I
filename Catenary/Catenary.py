@@ -13,6 +13,9 @@ file_path = r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Cat
 
 fig=plt.figure("Immagine originale")
 img = matplotlib.image.imread(file_path)
+xx=np.linspace(0,1800,100000)
+yy=np.full_like(xx,2040)
+plt.plot(xx,yy)
 plt.xlabel("x [pixels]")
 plt.ylabel("y [pixels]")
 plt.imshow(img)
@@ -25,7 +28,7 @@ def catenary(x, a, c, x0):
     '''
     return c + a * np.cosh((x - x0)/ a)
 
-file_path = r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Catenary\catenary.txt"
+file_path = r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Catenary\catenary2.txt"
 ##  Parabola
 
 # def parabola(x, a, b, c):
@@ -37,23 +40,22 @@ file_path = r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Cat
 x, y = np.loadtxt(file_path, unpack=True, delimiter=",")
 
 
-
 dx=1.750
 s_dx=0.005
 dy=1.550
 s_dy=0.005
 
-kx=dx/(max(x)-min(x))
-ky=dy/(max(y)-min(y))
+kx=dx/(2359-24)
+ky=dy/(2123-9)
 
 x=x*(kx)
 y=y*(ky)
 
-sigma_x = 5*kx
-sigma_y = 5*ky
+sigma_x = 1.15*kx##1.15= 2pixels/sqrt(12) ; where the two pixels is the uncertanty taking the data
+sigma_y = 1.15*ky
 ##Best Fit-Algorythm for the Catenary
 
-p0=(-480*ky, 2016*ky,1223*kx)
+p0=(-10*ky, 10*ky,400*kx)
 popt, pcov = curve_fit(catenary, x, y, p0)
 a_hat, c_hat, x0_hat = popt
 sigma_a, sigma_c, sigma_x0 = np.sqrt(pcov.diagonal())
@@ -72,7 +74,7 @@ res = y - catenary(x, a_hat, c_hat, x0_hat)
 ##Chi-Square test
 
 chi_square=sum((res/sigma_y)**2)
-print("Chi_square=",chi_square)
+print("Chi_square=",chi_square,"\nDegrees of freedom=108")
 
 ##Plots Catenary
 plt.figure("Punti e grafico dei residui ")
@@ -81,10 +83,10 @@ plt.errorbar(x, y, sigma_y, fmt=".",label="Punti misurati")
 
 x1=np.linspace(min(x),max(x),10000)
 
-plt.plot(x1, catenary(x1, a_hat, c_hat, x0_hat),label="Best-Fit algorithm for a catenary")
+plt.plot(x1, catenary(x1, a_hat, c_hat, x0_hat),label="Previsione dell'algoritmo di Best-Fit ")
 plt.grid(True)
-
-# plt.set(xlabel='$x [m]$', ylabel='$ y[m]$')
+plt.xlabel('$x [m]$')
+plt.ylabel('$ y[m]$')
 plt.legend()
 
 
@@ -94,8 +96,9 @@ plt.figure("Residui")
 
 
 plt.grid(True)
-plt.errorbar(x, res, sigma_y, fmt=".",label="Residuals")
-# plt.set(xlabel='$x [m]$', ylabel='$ y[m]$')
+plt.errorbar(x, res, sigma_y, fmt=".",label="Residui")
+plt.xlabel('$x [m]$')
+plt.ylabel('$ y[m]$')
 plt.legend()
 
 
@@ -120,10 +123,5 @@ plt.legend()
 # plt.ylabel("Residuals")
 # plt.ylim(-20.0, 20.0)
 # plt.savefig("catenaria.pdf")
-
-
-
-
-
 
 plt.show()
