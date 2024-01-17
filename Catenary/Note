@@ -1,1 +1,40 @@
-Drop here the experiment files!
+Drop her\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{float}
+\title{Valutazione sperimentale del modello della catenaria}
+\author{Di Meglio - Antonacci}
+\date{\today}
+\begin{document}
+
+\maketitle
+\section{Scopo dell'esperienza}
+Lo scopo dell'esperienza consiste nel paragonare il modello teorico di una catenaria, espresso dalla seguente equazione:
+$$ y = C(x; a, x_0, y_0) = y_0 + a \cosh\left(\frac{x - x_0}{a}\right) $$
+(1)\\
+e il modello reale. 
+\section{Cenni teorici}
+Per valutare l'efficacia dell'esperienza bisogna mettere a confronto, come detto in precedenza, il modello della catenaria ideale rispetto a quella riprodotta. 
+Se i dati raccolti rispettano le seguenti relazioni:
+$$ r_i = y_i - C(x; \hat{a}, \hat{x}_0, \hat{y}_0)
+\quad \text{e} \quad
+\sigma_{r_i} = \sigma_{y_i}
+$$
+Allora il grafico dei residui dovrebbe risultare vicino allo zero con piccole oscilazioni paragonabili alle ampiezze delle barre di errore.
+\section{Apparato strumentale}
+Per l'esperienza sono stati utilizzati i seguenti strumenti:\\
+-Filo a piombo\\
+-Catenella\\
+-Nastro adesivo\\
+-Metro a nastro con risoluzione di 1 mm\\
+-Smartphone
+\section{Descrizione delle misure}
+É stata appesa la catenella ad una parete con del nastro adesivo, successivamente si è trovato il punto medio fra l'orizzontale congiungente i due estremi della catenaria e il vertice di quest'ultima, così da poter scattare la fotografia modificandone al minimo la veridicità.
+Successivamente si è caricata la fotografia ottenuta in matplotlib.
+A questo punto sono state prese le coordinate dei punti ultimando così l'analisi della fotografia effettuata.
+\section{Analisi dei dati}
+Per utilizzare l'algoritmo di best fit dell'equazione (1) è stata verificata la seguente relazione:
+$$ \sigma_{x} \gg \left| \frac{dx}{dy} \right| \cdot \sigma_{y} $$
+\section(conclusioni)
+Dal grafico dei residui si può osservare che tutte le misure rispettano l'analisi espressa nella sezione "Cenni teorici" in quanto tutte le misure hanno errori vicini allo zero.
+\end{document}e the experiment files!
