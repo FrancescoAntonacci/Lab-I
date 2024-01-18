@@ -51,12 +51,12 @@ ky=dy/(2123-9)
 x=x*(kx)
 y=y*(ky)
 
-sigma_x = 1.15*kx##1.15= 2pixels/sqrt(12) ; where the two pixels is the uncertanty taking the data
-sigma_y = 1.15*ky
+sigma_x = 1.2*kx##1.15= 2pixels/sqrt(12) ; where the two pixels is the uncertanty taking the data
+sigma_y = 1.2*ky
 ##Best Fit-Algorythm for the Catenary
 
 p0=(-10*ky, 10*ky,400*kx)
-popt, pcov = curve_fit(catenary, x, y, p0)
+popt, pcov = curve_fit(catenary, x, y, p0,absolute_sigma=True)
 a_hat, c_hat, x0_hat = popt
 sigma_a, sigma_c, sigma_x0 = np.sqrt(pcov.diagonal())
 print("a_hat=",a_hat,"m\n sigma_a=", sigma_a,"m\n c_hat=", c_hat,"m\n sigma_c=", sigma_c,"m\n x0_hat=", x0_hat,"m\n sigma_x0=", sigma_x0,"m")
