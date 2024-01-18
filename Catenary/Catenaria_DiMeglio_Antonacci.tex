@@ -50,7 +50,7 @@ Dalla fotografia sono state prese le coordinate dei punti medi della catena in p
 E' stato considerato  $\sigma_x$ diverso da $\sigma_y$.
 
 \subsubsection{Incertezze sulle x}
-Sulle x è stata considerata  $\sigma_x= 0.3$ [pixel], in quanto è la distribuzione uniforme sulla risoluzione del nostro campionamento sulla fotografia( 1 pixel). 
+Sulle x è stata considerata  $\sigma_x= 0.3$ [pixel], in quanto è la distribuzione uniforme sulla risoluzione del nostro campionamento sulla fotografia( 1 [pixel]). 
 
 \subsubsection{Incertezze sulle y}
 Sulle y è stata considerata  $\sigma_y= 1.1$ [pixel].
@@ -58,7 +58,7 @@ E' stata stimata prendendo il ripetuto campionamento per una x, effettuato allo 
 
 
 \section{Analisi dei dati}
-
+Le distanze in pixel sono state convertite in metri grazie a dei fattori di scala ricavati da distanze note.
 \begin{figure}
 	\includegraphics[width=\textwidth]{catenaria_grafico.png}
 	\label{plottinobello}
@@ -77,7 +77,8 @@ Per utilizzare l'algoritmo di best fit $"curve\_fit()"$ per l'equazione (\ref{ca
 \sigma_{y} \gg \left| \frac{dy}{dx} \right| \sigma_{x}
 \end{equation}
 
-La derivata massima della curva ottenuta dal fit mediante (\ref{cat}) delle coordinate campionate è 0.8. 
+Nell'intervallo misurato la derivata massima di  (\ref{cat}) con parametri di (Table 1)  delle coordinate campionate è 0.8. 
+La relazione (2) è verificata:
 \begin{equation}
 1.1 [pixel] \gg 0.2[pixel]
 \end{equation}
@@ -106,7 +107,7 @@ Il chi-quadro stimato dall'algoritmo di best-fit è $X^2=120$.
 Il p-value corrispondente è $p=0.79$.
 
 \subsection{Errori sistematici}
-Dal grafico dei residui si osserva la presenza di errori sistematici: assunto di avere il modello "corretto" e i parametri "reali", un punto misurato nel grafico dei residui dovrebbe avere il 50\% di trovarsi sopra o sotto lo 0.
+Dal grafico dei residui (Figure 2) si osserva la presenza di errori sistematici: assunto di avere il modello "corretto" e i parametri "reali", un punto misurato nel grafico dei residui dovrebbe avere il 50\% di trovarsi sopra o sotto lo 0.
 Il fatto che ci siano sezioni con 11 punti consecutivi sopra il grafico dovrebbe accadere 1 volta su 2000.  Su un centinaio di punti che questo accada è alquanto improbabile: molto probabilmente è presente un errore sistematico nelle misure. 
 Questo potrebbe essere dovuto alla deformazione prospettica, oppure  all'occhio di pesce della lente, oppure a un cattivo capionamento. 
 
