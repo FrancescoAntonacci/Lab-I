@@ -1,0 +1,4 @@
+You can find here my first attempts with Kasa fit method and open-cv library.
+Make sure to  have installed cv2.
+Otherwise type in your  shell:
+>>> pip install opencv-python
