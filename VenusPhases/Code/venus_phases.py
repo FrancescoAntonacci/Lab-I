@@ -5,6 +5,11 @@ import numpy as np
 from matplotlib import pyplot as plt
 import matplotlib.patches as patches
 
+## DECLARATION OF INTENTIONS
+
+lum_plots=False# turn on luminosity distribution plots writing "True"
+cir_plots=False # turn on writing "True"
+
 ## Probably these are the only few lines in this code i can fully understand...
 
 def distance_squared(x,y,x_c,y_c):
@@ -95,16 +100,40 @@ def count_bright_pixels_cv(image_path, brightness_threshold):
 
     return above_threshold_count
 
+
+def lum_distribution(image_path, brightness_threshold):
+    '''
+    Suggested by our lord T-man
+
+
+    '''
+
+    lum_dis=[]
+
+    for i in range(0, brightness_threshold+1):
+
+        # Read the image using OpenCV
+        image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+
+        # Create a binary mask based on the brightness threshold
+        mask = (image > i).astype(np.uint8)
+
+        # Count the number of pixels above the threshold
+        atc = np.sum(mask) #above threshold count (ascending order)
+
+        lum_dis.append(atc)
+
+
+
+    return lum_dis/max(lum_dis)
+
 ## :-)
 
 def mother_fucking_func(minp,manp,folder_path,plots):
     '''
-    Mother_fuching_func does what it sounds like.
+    Mother_fucking_func does what it sounds like.
     First it will find you, then it will ask you the minimum and maximum index of the photos to analyze, please give him the folder and for courtesy tell him if you whant to have some plots. It will return, after many traumas, the array of the exteemed radii and uncertainty, the number of pixels brighter than a threshold and uncertainty of Venus from your photos. Please be kind with this monster.
     '''
-
-
-
 
 
 
@@ -134,7 +163,9 @@ def mother_fucking_func(minp,manp,folder_path,plots):
 
         ## Apply edge detection with our best friend Canny!!!
 
-        edges = cv2.Canny(image, 10, 90)
+        ##      10, 90 is quite working...
+        ##
+        edges = cv2.Canny(image, 10, 80)
         # Find contours in the edged image
         contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
@@ -177,7 +208,7 @@ def mother_fucking_func(minp,manp,folder_path,plots):
             mannboy=np.linspace(np.size(x_c)-1,0,np.size(x_c))
             for amate_il_toma_toma in mannboy: #amate_il_toma_toma, eternity, more or less.
 
-                mask=distance_squared(x_c[int(amate_il_toma_toma)],y_c[int(amate_il_toma_toma)],x_circle,y_circle)<(0.95*r**2)
+                mask=distance_squared(x_c[int(amate_il_toma_toma)],y_c[int(amate_il_toma_toma)],x_circle,y_circle)<(0.99*r**2)
                 if (mask):
                     x_c.pop(int(amate_il_toma_toma)) # Via il lezzume!
                     y_c.pop(int(amate_il_toma_toma))
@@ -197,7 +228,7 @@ def mother_fucking_func(minp,manp,folder_path,plots):
         ## Get that radius!
         radii.append(r)
         s_radii.append(sigma_r)
-        print("Radius=",r,"$\pm$",sigma_r)
+        print("Radius=",round(r,2),"$\pm$",round(sigma_r,2))
     ## THIS IS ALL YOU GET
     ##
     return radii,s_radii
@@ -206,25 +237,81 @@ def mother_fucking_func(minp,manp,folder_path,plots):
 
 
 ##
-def lumtest():
+def lumtest(plots):
+
+    # Specify the image path and brightness threshold
+
+    bc=20
+    brightness_threshold = bc  # Adjust this value as needed!!
+
+
+
+    lum_dis_all=[]#Luminosity distribution of all photos
+
     for i in range (minp, (manp+1),1):
         print("Photo:",i)
         num=str(i)
+
 
         image_path=folder_path+num+'.jpg'
         image = cv2.imread(image_path)
 
         image_original=image
 
-        # Specify the image path and brightness threshold
-        brightness_threshold = 20  # Adjust this value as needed!!
-
+        if (i<9):
+            brightness_threshold=17 ##ADJUST FOR LESS WHEN THERE IS A LACK OF LUMINOSITY
+        # Count pixels above the threshold using OpenCV
+        if (i<3):
+            brightness_threshold=14 ##ADJUST FOR LESS WHEN THERE IS A LACK OF LUMINOSITY
         # Count pixels above the threshold using OpenCV
         count = count_bright_pixels_cv(image_path, brightness_threshold)
 
         phi.append(count)
         s_phi.append(np.sqrt(count)) # to be adjusted since it is completely arbitrary
+
         print(f"Number of pixels above brightness threshold: {count}")
+        brightness_threshold = bc  # Adjust this value as needed!!
+
+
+        lum_dis=lum_distribution(image_path, brightness_threshold)
+        lum_dis_all.append(lum_dis)
+        if (plots==True):
+            ## "thy shall plot the luminosity distribution" as our lord Toma Toma said
+
+            x_plot=np.linspace(0,brightness_threshold,brightness_threshold+1)
+            ##Happy plottin'
+            name_plot="Luminoisty distribution of photo:"+num
+
+
+            plt.figure(name_plot)
+            plt.plot(x_plot,lum_dis)
+            plt.show()
+            ##
+
+    x_plot=np.linspace(0,brightness_threshold,brightness_threshold+1)
+    ## general plot of luminosity distribution
+
+
+
+    plt.figure("General plot of luminosity distribution")
+    print(np.size(lum_dis_all[0]))
+
+    #
+    # print(x_plot)
+    # print(lum_dis_all)
+    # print(np.size(lum_dis_all[0,0]))
+    j=1
+    for i in lum_dis_all:
+        iteration=str(j)
+        l_p="Photo:"+iteration # label of the plot
+        plt.plot(x_plot,i,label=l_p)
+        plt.xlabel("Luminosity Threshold")
+        plt.ylabel("Percentage above threshold")
+        j=j+1
+        plt.legend()
+
+    plt.show()
+
     return phi,s_phi
 ##
 
@@ -264,13 +351,13 @@ folder_path=r'C:\Users\zoom3\Documents\Unipi\Laboratorio I\VenusPhases\code\venu
 
 
 
-## THE GREAT CALL
+## THE GREAT CALLc
+radii,s_radii=mother_fucking_func(minp,manp,folder_path,cir_plots) ## TURN OFF PLOTS CHANGING LAST VARIABLE TO FALSE!
 
-radii,s_radii=mother_fucking_func(minp,manp,folder_path,True)
 
 ## the little call
 
-lumtest()
+lumtest(lum_plots) ## TURN OFF PLOTS CHANGING LAST VARIABLE TO FALSE!
 
 
 
@@ -293,22 +380,6 @@ plt.legend()
 plt.show()
 
 
-
-
-
-
-## Plots to get to understand something (even though they are quite useless by themselves)
-
-# che_palle=np.linspace(minp,manp,(manp-minp+1))
-#
-# plt.figure()
-# plt.plot(che_palle,phi)
-# plt.show()
-
-
-## ...
-
-
-# plt.figure()
-# plt.plot(che_palle,app_area_venus)
-# plt.show()
+##Correlation phase-apparent area,
+cpa=np.corrcoef(ratiod_i,app_area_venus)
+print("Correlation phase-apparent area",round(cpa[1,0],2))
