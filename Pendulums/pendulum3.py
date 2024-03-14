@@ -16,18 +16,38 @@ def w0_calc(m,g,l,I):
     return np.sqrt(m*g*l/I)
 
 
-def theta_t(theta_0,t,tau):
+def theta_t(t,theta_0,tau):
     return theta_0*np.e**(-t/tau)
 
-def x_t(t,A0,wf,wc,phi1,phi2):
-    wp=(wc+wf)/2
+def x_t_pen(t,A,w,phi,c):
+    return A*np.cos(w*t+phi)+c
+
+def x_t_fr(t,A,w,phi,c,tau):
+    return A*(np.e**(-t/tau))*np.cos(w*t+phi)+c
+
+def phipb():
     phip=(phi1+phi2)/2
-    wb=(wc-wf)/2
     phib=(phi1-phi2)/2
 
-    x=2*A0*np.cos(wp*t+phip)*np.cos(wb*t+phib)
+def x_t_beats(t,A0,wf,wc,phip,phib,c,tau):
+    wp=(wc+wf)/2
+    wb=(wc-wf)/2
+
+    x=2*A0*(np.e**(-t/tau))*np.cos(wp*t+phip)*np.cos(wb*t+phib)+c
 
     return x
+
+def A_calc(xx):
+    A=(max(xx)-min(xx))/2
+    return A
+
+def c_calc(xx):
+    c=(max(xx)+min(xx))/2
+    return c
+
+def phi_calc(xx,yy,A,c):
+    phi=np.arccos((yy[0]-c)/A)
+    return phi
 
 ## Functions for data manipulation
 
@@ -50,17 +70,6 @@ def sample_sigma(v):
     std_dev= np.sqrt(s)
     return std_dev
 
-def sy_eff(d_func,params,x,sx,sy):
-    '''
-    Questa funzione vuole verificare le ipotesi di best fit di curve fit
-    ritorna il vettore delle sigma y efficaci
-
-    '''
-
-    sy_eff=np.sqrt((d_func(x,params[0],params[1])*sx)**2+sy**2) # to be adjusted
-
-    return sy_eff
-
 
 def residuals(func,params,yy,xx):
     """
@@ -73,58 +82,90 @@ def residuals(func,params,yy,xx):
 
 
 
-def x2_p_value(res,s_y,dof):
+def x2_p_value(res,s_y,n_par):
 
     x2=sum((res/s_y)**2)
 
-    p_value1 = 1 - chi2.cdf(x2, dof)
-    p_value2=chi2.cdf(x2, dof)
+    p_value1 = 1 - chi2.cdf(x2,(np.size(res)-n_par))
+    p_value2=chi2.cdf(x2, (np.size(res)-n_par))
 
     p_value=min(p_value1,p_value2)
 
-    print("Chi_square=",round(x2,3),"p_value=",round(p_value,3),"Degrees of freedom=",dof)
+    print("Chi_square=",round(x2,3),"p_value=",round(p_value,3),"Degrees of freedom=",(np.size(res)-n_par))
+
     return p_value,x2
 
 
+def p0_calc(xx,yy):
+
+    """
+    """
+    A=A_calc(yy)
+    c=c_calc(yy)
+    phi=phi_calc(xx,yy,A,c)
+
+    i=np.argmax(yy)
+    y=yy[i]
+
+    t0=xx[i]
+    while(yy[i]>=c):
+        i=i+1
+
+    t1=xx[i]
+
+    pi_4=t1-t0
+
+    w=np.pi/(2*pi_4)
+    v=[A,w,phi,c]
+    return v
 
 
 ## Classes : easiest way to ULTRA SPAGHETTI CODE
 
 class data_set():
-    def __init__(self,path,label1,label2,func):
-        self.t1,self.s1,self.t2,self.s2=np.loadtxt(path,unpack=True,delimiter=",")
+    def __init__(self,path,label1,label2,func,s_t,s_s):
+        self.t1,self.s1,self.t2,self.s2=np.loadtxt(path,unpack=True,skiprows=5)
 
-        self.s_t1=self.s_t2=np.full_like(self.t1,1) # Must be adjusted
-        self.s_s1=self.s_s2=np.full_like(self.s1,1) # Must be adjusted
+        self.s_t1=self.s_t2=np.full_like(self.t1,s_t) # Must be adjusted
+        self.s_s1=self.s_s2=np.full_like(self.s1,s_s) # Must be adjusted
 
         self.label1=label1
         self.label2=label2
 
         self.func=func
 
-        self.p01
-        self.p02
+
+
+        self.p01=[]
+        self.p02=[]
+
+        self.params1=[]
+        self.params2=[]
+
+        self.s_params1=[]
+        self.s_params2=[]
+
 
     def fit(self):
 
+        print(self.p01)
+
         if (np.size(list(self.label1))>0): # For the first item
-            self.popt, self.pcov = curve_fit(self.func, self.t1, self.s1,sigma=self.s_s1,absolute_sigma=True)
+            self.popt, self.pcov = curve_fit(self.func, self.t1, self.s1,p0=self.p01,sigma=self.s_s1,absolute_sigma=True)
             self.params1= self.popt
             self.s_params1= np.sqrt(self.pcov.diagonal())
-            self.s_s0= self.s_s1
 
 
             for i in range(0,np.size(self.params1)):
                 print(round(self.params1[i],3),"+-",round(self.s_params1[i],3))
 
 
+        print(self.p02)
 
-
-        # if (np.size(list(self.label2))>0): #For the second item
-        #     self.popt, self.pcov = curve_fit(self.func, self.t2, self.s2,sigma=self.s_s2,absolute_sigma=True)
-        #     self.params2= self.popt
-        #     self.s_params2= np.sqrt(self.pcov.diagonal())
-        #     self.s_s0= self.s_s2
+        if (np.size(list(self.label2))>0): #For the second item
+            self.popt, self.pcov = curve_fit(self.func, self.t2, self.s2,p0=self.p02,sigma=self.s_s2,absolute_sigma=True)
+            self.params2= self.popt
+            self.s_params2= np.sqrt(self.pcov.diagonal())
 
 
             for i in range(0,np.size(self.params2)):
@@ -141,12 +182,12 @@ class data_set():
 
                 plt.plot(self.xx1,self.func(self.xx1,*self.params1),label=self.label1+" previsione modello")
 
-            # if (np.size(list(self.label2))>0):
-            #     plt.errorbar(self.t2,self.s2,self.s_s2,self.s_t2,fmt=".",label=self.label2)
-            #
-            #     self.xx2=np.linspace(min(self.t2),max(self.t2),10000)
-            #
-            #     plt.plot(self.xx2,self.func(self.xx2,*self.params2),label=self.label2+" previsione modello")
+            if (np.size(list(self.label2))>0):
+                plt.errorbar(self.t2,self.s2,self.s_s2,self.s_t2,fmt=".",label=self.label2)
+
+                self.xx2=np.linspace(min(self.t2),max(self.t2),10000)
+
+                plt.plot(self.xx2,self.func(self.xx2,*self.params2),label=self.label2+" previsione modello")
 
             plt.xlabel('$t[s]$')
             plt.ylabel('$[]$')
@@ -186,37 +227,104 @@ class data_set():
             plt.show()
 ## Data
 
+s_t=0.05 # To be taken in serious consideration!
+s_s=1.8 #!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!
+
+
 # Data single pendulum 1
 
-f_path1=r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Pendulums\test1.txt"
-
-ds1=data_set(f_path1,"si","pure",para)
-
-# Data pendulums in phase  2
-
-f_path2=r""
+f_path1=r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Pendulums\p_1_a5.txt"
 
 
-# Data pendulums out of phase 3
+# Data pendulum with friction 2
 
-f_path3=r""
+f_path2=r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Pendulums\p_2_a5.txt"
 
-# Data beats 4
+# Data pendulums in phase  3
 
-f_path4=r""
-
-
-##
-            # for i in range(5):        ##THIS PART OF CODE NEEDS A LOT OF MAINTENANCE: it would be more effective if it were processed out of the class
-            #
-            #     self.s_s1=sy_eff(self.d_func,self.params1,self.t1,self.s_t1,self.s_s1)
-            #     self.popt, self.pcov = curve_fit(self.func, self.t1, self.s1,sigma=self.s_s1,absolute_sigma=True)
-            #     self.params= self.popt
-            #     self.s_params= np.sqrt(self.pcov.diagonal())
-
-##
+f_path3=r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Pendulums\p_3_a5_1.txt"
 
 
-## Plots
+# Data pendulums out of phase 4
+
+f_path4=r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Pendulums\p_3_a5_1.txt"
 
 
+# Data beats 5
+
+f_path5=r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Pendulums\p_5_1.txt"
+
+
+## p_1
+
+print("\n\nP_1")
+
+p_1=data_set(f_path1,"","A5",x_t_pen,s_t,s_s)
+
+
+#Adjust initial guesses
+p02=p0_calc(p_1.t2,p_1.s2)
+p_1.p02=p02
+
+p_1.p02[2]=np.pi/4
+p_1.p02[1]=4.5
+
+
+p_1.fit()
+# p_1.plot()
+# p_1.x2_res_p()
+
+## p_2
+
+print("\n\nP_2")
+p_2=data_set(f_path2,"","A5",x_t_fr,s_t,s_s)
+
+p_2.p02=np.append(p_1.params2,[4])
+
+p_2.fit()
+# p_2.plot()
+# p_2.x2_res_p()
+
+
+
+
+## p_3
+print("\n\nP_3")
+
+p_3=data_set(f_path3,"A4","A5",x_t_fr,s_t,s_s)
+
+
+p_3.p01=np.append(p_1.params2,[4])
+p_3.p02=np.append(p_1.params2,[4])
+
+p_3.fit()
+# p_3.plot()
+# p_3.x2_res_p()
+
+## p_4
+
+print("\n\nP_4")
+
+p_4=data_set(f_path4,"A4","A5",x_t_fr,s_t,s_s)
+
+
+p_4.p01=np.append(p_1.params2,[4])
+p_4.p02=np.append(p_1.params2,[4])
+
+p_4.fit()
+# p_4.plot()
+# p_4.x2_res_p()
+
+
+## p_5
+
+print("\n\nP_5")
+
+p_5=data_set(f_path5,"A4","A5",x_t_beats,s_t,s_s)
+
+p_5.p01=[200,5,0.1,+0.5,0,530,4]
+p_5.p02=[200,5,0.1,+0.5,0,530,4]
+
+p_5.fit()
+p_5.plot()
+# p_5.x2_res_p()
