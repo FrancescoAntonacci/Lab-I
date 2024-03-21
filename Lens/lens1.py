@@ -11,8 +11,8 @@ def linear_function(x, m, q):
     return m * x + q
 
 ''' inseriamo i dati raccolti durante l'esperienza laboratoriale'''
-seni_incidenti = np.array([1, 2.3, 3.5, 4.5, 5.4, 6.0, 6.7, 7.3, 7.6, 7.7])
-seni_rifratti = np.array([0.8, 1.6, 2.4, 3.1, 3.7, 4.1, 4.5, 4.9, 5.1, 5.2])
+seni_incidenti = np.array([3.5,4,6,7,8,10,11,12,13,16])
+seni_rifratti = np.array([4,6,8,10,12,14,16,18,20,22])
 
 '''fittiamo i dati'''
 popt, pcov = curve_fit(linear_function, seni_incidenti, seni_rifratti)
@@ -39,7 +39,5 @@ plt.grid(True)
 
 plt.show()
 
-'''calcoliamo l'indice di rifrazione della lente '''
-indice_rifrazione_lente = 1 / popt[0]
-'''dove popt[0] rappresenta il nostro dato ottimizzato'''
-print("L'indice di rifrazione della lente è:", indice_rifrazione_lente)
+
+print("L'indice di rifrazione della lente è:", popt[0], "pioIX=",np.sqrt(np.diagonal(pcov)))
