@@ -29,11 +29,14 @@ def phipb():
     phip=(phi1+phi2)/2
     phib=(phi1-phi2)/2
 
-def x_t_beats(t,A0,wf,wc,phip,phib,c,tau):
+def wpwb_calc(wf,wc):
     wp=(wc+wf)/2
     wb=(wc-wf)/2
+    return wp,wb
 
-    x=2*A0*(np.e**(-t/tau))*np.cos(wp*t+phip)*np.cos(wb*t+phib)+c
+def x_t_beats(t,A0,wp,wb,phip,phib,c,tau):
+
+    x=(2*A0*(np.e**(-t/tau))*np.cos(wp*t+phip)*np.cos(wb*t+phib))+c
 
     return x
 
@@ -151,7 +154,7 @@ class data_set():
         print(self.p01)
 
         if (np.size(list(self.label1))>0): # For the first item
-            self.popt, self.pcov = curve_fit(self.func, self.t1, self.s1,p0=self.p01,sigma=self.s_s1,absolute_sigma=True)
+            self.popt, self.pcov = curve_fit(self.func, self.t1, self.s1,p0=self.p01,sigma=self.s_s1,absolute_sigma=True,maxfev=30000)
             self.params1= self.popt
             self.s_params1= np.sqrt(self.pcov.diagonal())
 
@@ -163,7 +166,7 @@ class data_set():
         print(self.p02)
 
         if (np.size(list(self.label2))>0): #For the second item
-            self.popt, self.pcov = curve_fit(self.func, self.t2, self.s2,p0=self.p02,sigma=self.s_s2,absolute_sigma=True)
+            self.popt, self.pcov = curve_fit(self.func, self.t2, self.s2,p0=self.p02,sigma=self.s_s2,absolute_sigma=True,maxfev=30000)
             self.params2= self.popt
             self.s_params2= np.sqrt(self.pcov.diagonal())
 
@@ -247,7 +250,7 @@ f_path3=r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Pendulu
 
 # Data pendulums out of phase 4
 
-f_path4=r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Pendulums\p_3_a5_1.txt"
+f_path4=r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Pendulums\p_4_2.txt"
 
 
 # Data beats 5
@@ -259,7 +262,7 @@ f_path5=r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Pendulu
 
 print("\n\nP_1")
 
-p_1=data_set(f_path1,"","A5",x_t_pen,s_t,s_s)
+p_1=data_set(f_path1,"","P_1_A5",x_t_pen,s_t,s_s)
 
 
 #Adjust initial guesses
@@ -277,7 +280,7 @@ p_1.fit()
 ## p_2
 
 print("\n\nP_2")
-p_2=data_set(f_path2,"","A5",x_t_fr,s_t,s_s)
+p_2=data_set(f_path2,"","P_2_A5",x_t_fr,s_t,s_s)
 
 p_2.p02=np.append(p_1.params2,[4])
 
@@ -291,7 +294,7 @@ p_2.fit()
 ## p_3
 print("\n\nP_3")
 
-p_3=data_set(f_path3,"A4","A5",x_t_fr,s_t,s_s)
+p_3=data_set(f_path3,"P_3_A4","P_3_A5",x_t_fr,s_t,s_s)
 
 
 p_3.p01=np.append(p_1.params2,[4])
@@ -301,11 +304,11 @@ p_3.fit()
 # p_3.plot()
 # p_3.x2_res_p()
 
-## p_4
+## p_4 DA AGGIUSTARE!
 
 print("\n\nP_4")
 
-p_4=data_set(f_path4,"A4","A5",x_t_fr,s_t,s_s)
+p_4=data_set(f_path4,"P_4_A4","P_4_A5",x_t_fr,s_t,s_s)
 
 
 p_4.p01=np.append(p_1.params2,[4])
@@ -316,15 +319,29 @@ p_4.fit()
 # p_4.x2_res_p()
 
 
-## p_5
+## p_5 DA AGGIUSTARE
 
 print("\n\nP_5")
 
-p_5=data_set(f_path5,"A4","A5",x_t_beats,s_t,s_s)
+p_5=data_set(f_path5,"P_5_A4","P_5_A5",x_t_beats,s_t,s_s)
 
-p_5.p01=[200,5,0.1,+0.5,0,530,4]
-p_5.p02=[200,5,0.1,+0.5,0,530,4]
+p_5.p01=[90,4.4,0.08,0,np.pi/2,490,70]
+p_5.p02=[90,4.4,0.07,-0.3,0,490,70]
 
 p_5.fit()
 p_5.plot()
-# p_5.x2_res_p()
+p_5.x2_res_p()
+
+
+
+
+
+
+## TEST
+
+plt.figure("")
+plt.plot(p_5.t2,p_5.s2)
+gino=np.linspace(min(p_5.t1),max(p_5.t1),10000)
+plt.plot(gino,x_t_beats(gino,*[90,4.4,0.08,-0.3,0,524,80]))
+plt.show()
+

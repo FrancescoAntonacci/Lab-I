@@ -158,6 +158,7 @@ class data_set():
             self.params1= self.popt
             self.s_params1= np.sqrt(self.pcov.diagonal())
 
+            print(self.label1,"\n")
 
             for i in range(0,np.size(self.params1)):
                 print(round(self.params1[i],3),"+-",round(self.s_params1[i],3))
@@ -170,6 +171,7 @@ class data_set():
             self.params2= self.popt
             self.s_params2= np.sqrt(self.pcov.diagonal())
 
+            print(self.label2,"\n")
 
             for i in range(0,np.size(self.params2)):
                 print(round(self.params2[i],3),"+-",round(self.s_params2[i],3))
@@ -179,7 +181,7 @@ class data_set():
 
             if (np.size(list(self.label1))>0):
 
-                plt.figure(self.label1)
+                plt.figure(self.label1,figsize=(10, 10))
 
                 plt.errorbar(self.t1,self.s1,self.s_s1,self.s_t1,fmt=".",label=self.label1)
 
@@ -191,11 +193,12 @@ class data_set():
                 plt.legend(fontsize='large')
                 plt.grid(True)
                 plt.show()
+                # plt.savefig(self.label1)
 
 
             if (np.size(list(self.label2))>0):
 
-                plt.figure(self.label2)
+                plt.figure(self.label2,figsize=(10, 10))
 
                 plt.errorbar(self.t2,self.s2,self.s_s2,self.s_t2,fmt=".",label=self.label2)
 
@@ -207,7 +210,7 @@ class data_set():
                 plt.legend(fontsize='large')
                 plt.grid(True)
                 plt.show()
-
+                # plt.savefig(self.label2)
 
 
     def x2_res_p(self):
@@ -215,41 +218,42 @@ class data_set():
 
         if (np.size(list(self.label1))>0):
 
-            plt.figure(self.label1+" residuals")
+            plt.figure(self.label1+" residuals",figsize=(10, 10))
 
             self.res1=residuals(self.func,self.params1,self.s1,self.t1)
             self.dof1=np.size(self.params1)
             self.p_value,self.x21=x2_p_value(self.res1,self.s_s1,self.dof1)
 
-            plt.errorbar(self.t1,self.res1,self.s_s1,fmt=".",label=self.label1+"residuals")
+            plt.errorbar(self.t1,self.res1,self.s_s1,fmt=".",label=self.label1+"residui")
 
             plt.xlabel('$t[s]$')
             plt.ylabel('$[]$')
             plt.legend(fontsize='large')
             plt.grid(True)
             plt.show()
-
+            # plt.savefig(self.label1+"_residuals")
 
 
         if (np.size(list(self.label2))>0):
 
-            plt.figure(self.label2+" residuals")
+            plt.figure(self.label2+" residuals",figsize=(10, 10))
 
             self.res2=residuals(self.func,self.params2,self.s2,self.t2)
             self.dof2=np.size(self.params2)
             self.p_value,self.x22=x2_p_value(self.res2,self.s_s2,self.dof2)
 
-            plt.errorbar(self.t2,self.res2,self.s_s2,fmt=".",label=self.label2+"residuals")
+            plt.errorbar(self.t2,self.res2,self.s_s2,fmt=".",label=self.label2+"residui")
 
             plt.xlabel('$t[s]$')
             plt.ylabel('$[]$')
             plt.legend(fontsize='large')
             plt.grid(True)
             plt.show()
+            # plt.savefig(self.label2+"_residuals")
 ## Data
 
 s_t=0.05 # To be taken in serious consideration!
-s_s=1.8 #!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!
+s_s=1 #!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!
 
 
 # Data single pendulum 1
@@ -263,7 +267,7 @@ f_path2=r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Pendulu
 
 # Data pendulums in phase  3
 
-f_path3=r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Pendulums\p_3_a5_1.txt"
+f_path3=r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Pendulums\p_3_a5_2.txt"
 
 
 # Data pendulums out of phase 4
@@ -280,7 +284,7 @@ f_path5=r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Pendulu
 
 print("\n\nP_1")
 
-p_1=data_set(f_path1,"","P_1_A5",x_t_pen,s_t,s_s)
+p_1=data_set(f_path1,"","Pendolo singolo",x_t_pen,s_t,s_s)
 
 
 #Adjust initial guesses
@@ -298,7 +302,7 @@ p_1.x2_res_p()
 ## p_2
 
 print("\n\nP_2")
-p_2=data_set(f_path2,"","P_2_A5",x_t_fr,s_t,s_s)
+p_2=data_set(f_path2,"","Pendolo singolo smorzato",x_t_fr,s_t,s_s)
 
 p_2.p02=np.append(p_1.params2,[4])
 
@@ -312,7 +316,7 @@ p_2.x2_res_p()
 ## p_3
 print("\n\nP_3")
 
-p_3=data_set(f_path3,"P_3_A4","P_3_A5",x_t_fr,s_t,s_s)
+p_3=data_set(f_path3,"Pendolo in fase 1","Pendolo in fase 2",x_t_fr,s_t,s_s)
 
 
 p_3.p01=np.append(p_1.params2,[4])
@@ -322,11 +326,11 @@ p_3.fit()
 p_3.plot()
 p_3.x2_res_p()
 
-## p_4 DA AGGIUSTARE!
+## p_4
 
 print("\n\nP_4")
 
-p_4=data_set(f_path4,"P_4_A4","P_4_A5",x_t_fr,s_t,s_s)
+p_4=data_set(f_path4,"Pendolo in controfase 1","Pendolo in controfase 2",x_t_fr,s_t,s_s)
 
 
 p_4.p01=np.append(p_1.params2,[4])
@@ -337,11 +341,11 @@ p_4.plot()
 p_4.x2_res_p()
 
 
-## p_5 DA AGGIUSTARE
+## p_5
 
 print("\n\nP_5")
 
-p_5=data_set(f_path5,"P_5_A4","P_5_A5",x_t_beats,s_t,s_s)
+p_5=data_set(f_path5,"Battimenti pendolo 1","Battimenti pendolo 2",x_t_beats,s_t,s_s)
 
 p_5.p01=[90,4.4,0.08,-0.01,np.pi/2,490,60]
 p_5.p02=[90,4.4,0.07,-0.3,0,490,70]
@@ -351,3 +355,75 @@ p_5.plot()
 p_5.x2_res_p()
 
 
+
+## Contacci
+"""
+I'm not writing a new class just for 2 points!
+
+This part was so bad..
+"""
+# Googled data
+d_brass= 8730
+d_aluminum= 2700
+
+# Dimension of the stick
+
+l_sti=0.476
+s_l_sti=0.001
+
+b1_sti=0.0084
+s_b1_sti=0.00005
+
+b2_sti=0.0084
+s_b2_sti=0.00005
+
+# Dimensions of the cilinder
+a_cil=0.0124
+s_a_cil=0.00005
+
+d_cil=0.069
+s_d_cil=0.001
+
+#volumes
+
+v_sti=l_sti*b1_sti*b2_sti
+s_v_sti=v_sti*((s_l_sti/l_sti)+(s_b1_sti/b1_sti)+(s_b2_sti/b2_sti))
+
+v_cil=(np.pi/4)*((d_cil)**2)*a_cil
+s_v_cil=(np.pi/4)*((s_a_cil/a_cil)+2*(s_d_cil/d_cil))*v_cil
+
+
+m_sti=d_aluminum*v_sti
+s_m_sti=d_aluminum*s_v_sti
+
+m_cil=d_brass*v_cil
+s_m_sti=d_aluminum*s_v_cil
+
+# Inertia
+I=(1/3)*m_sti*(l_sti**2+b1_sti**2)+0.5*((d_cil/2)**2)*m_cil+((l_sti+d_cil/2)**2)*m_cil #Inertia
+s_I="bla,bla,bla"
+
+# Centre of mass with rispect to the pole
+xcm=((l_sti/2)*(m_sti)+(l_sti+d_cil/2)*(m_cil))/(m_cil+m_sti)
+s_xcm="bla,bla,bla"
+
+# Expected period
+
+g=9.81 #I'm not commenting this
+s_g=0.001
+
+#to simplify formulas
+N=(m_cil+m_sti)*g*(xcm)
+D=I
+w0=np.sqrt(N/D)
+
+s_r=s_d_cil/2 #to simplify formulas
+r=d_cil/2
+
+der_b1=(1/(2*w0))*( ((l_sti**2*d_aluminum*b1_sti)*D-N*(0.33*d_aluminum*(2*l_sti**3*b1_sti+4*b1_sti**3*l_sti)))/D**2)
+der_l=(1/(2*w0))*( ((g*(2*l_sti*d_aluminum*b1_sti**2+d_brass*np.pi*a_cil*r**2))*D-N*(0.33*d_aluminum*(3*l_sti**2*b1_sti**2+b1_sti**4)+2*(l_sti+r)*(np.pi*d_brass*r**2*a_cil)))/D**2)
+der_g=w0/(2*g)
+der_r=(1/(2*w0))*( ((d_brass*np.pi*r**2*a_cil+(l_sti+r)*d_brass*2*np.pi*r*a_cil)*D-N*(r**3*np.pi*d_brass*a_cil+2*(l_sti+r)*(np.pi*d_brass*r**2*a_cil)+(l_sti+r)**2*2*r*d_brass*a_cil))/D**2)
+s_w0=np.sqrt((der_b1*s_b1_sti)**2+(der_l*s_l_sti)**2+(der_g*s_g)**2+(der_r*s_r)**2)
+
+print("w0 Pendolo singolo (Teoria)=",round(w0,3),"+-",round(s_w0,3))
