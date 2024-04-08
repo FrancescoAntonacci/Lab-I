@@ -1,94 +1,100 @@
 Here are all the values of best fit  for all the configurations!
 I leave under each configuaration the fitting law definition( ignore x, it is not a parameter)
 
+
+
 P_1
+[]
+[124.0, 4.5, 0.7853981633974483, 530.0]
+Pendolo singolo 
 
-115.122 +- 0.149
-4.44 +- 0.0
-0.653 +- 0.003
-530.727 +- 0.105
-Chi_square= 1563.51 p_value= 0.0 Degrees of freedom= 292
+118.235395 +- 0.064841
+4.431822 +- 0.000482
+0.692914 +- 0.00292
+529.877018 +- 0.058193
+Chi_square= 3778.981 p_value= 0.0 Degrees of freedom= 193
 
-
-def x_t_pen(t,A,w,phi,c):
-    return A*np.cos(w*t+phi)+c
 
 P_2
 []
-[115.12189659   4.44030211   0.6534758  530.72677792   4.        ]
-123.207 +- 0.277
-4.427 +- 0.0
--1.331 +- 0.002
-442.42 +- 0.081
-29.761 +- 0.175
-Chi_square= 493.531 p_value= 0.422 Degrees of freedom= 488
+[118.23539532   4.43182202   0.69291365 529.87701797   4.        ]
+Pendolo singolo smorzato 
 
-def x_t_fr(t,A,w,phi,c,tau):
-    return A*(np.e**(-t/tau))*np.cos(w*t+phi)+c
+123.957835 +- 0.143552
+4.423756 +- 0.000507
+-1.316132 +- 0.002928
+440.979771 +- 0.055736
+28.19731 +- 0.165449
+Chi_square= 1248.756 p_value= 0.0 Degrees of freedom= 192
 
 
 P_3
-[115.12189659   4.44030211   0.6534758  530.72677792   4.        ]
-164.175 +- 0.155
-4.441 +- 0.0
--0.102 +- 0.001
-473.711 +- 0.043
-82.642 +- 0.171
-[115.12189659   4.44030211   0.6534758  530.72677792   4.        ]
-165.079 +- 0.156
-4.44 +- 0.0
--0.069 +- 0.001
-474.54 +- 0.043
-81.187 +- 0.166
-Chi_square= 8075.963 p_value= 0.0 Degrees of freedom= 1751
-Chi_square= 7553.714 p_value= 0.0 Degrees of freedom= 1751
+[118.23539532   4.43182202   0.69291365 529.87701797   4.        ]
+Pendolo in fase 1 
 
+127.529986 +- 0.127859
+4.439241 +- 0.000508
+-0.482843 +- 0.002946
+485.831408 +- 0.055969
+66.485634 +- 0.781397
+[118.23539532   4.43182202   0.69291365 529.87701797   4.        ]
+Pendolo in fase 2 
 
-def x_t_fr(t,A,w,phi,c,tau):
-    return A*(np.e**(-t/tau))*np.cos(w*t+phi)+c
+125.648955 +- 0.129394
+4.441719 +- 0.000502
+-0.512484 +- 0.00294
+571.934015 +- 0.057741
+103.845417 +- 1.846794
+Chi_square= 115.3 p_value= 0.0 Degrees of freedom= 192
+Chi_square= 166.991 p_value= 0.096 Degrees of freedom= 192
+
 
 P_4
-[115.12189659   4.44030211   0.6534758  530.72677792   4.        ]
-128.624 +- 0.186
-4.606 +- 0.0
--1.346 +- 0.001
-489.073 +- 0.059
-96.096 +- 0.555
-[115.12189659   4.44030211   0.6534758  530.72677792   4.        ]
-128.507 +- 0.19
-4.604 +- 0.0
-1.859 +- 0.001
-543.939 +- 0.059
-79.73 +- 0.403
-Chi_square= 10433.105 p_value= 0.0 Degrees of freedom= 939
-Chi_square= 11438.733 p_value= 0.0 Degrees of freedom= 939
+[118.23539532   4.43182202   0.69291365 529.87701797   4.        ]
+Pendolo in controfase 1 
 
-def x_t_fr(t,A,w,phi,c,tau):
-    return A*(np.e**(-t/tau))*np.cos(w*t+phi)+c
+140.141695 +- 0.143877
+4.601899 +- 0.000517
+-1.36969 +- 0.002994
+489.819812 +- 0.059488
+42.573804 +- 0.330273
+[118.23539532   4.43182202   0.69291365 529.87701797   4.        ]
+c:\users\zoom3\anaconda3\Lib\site-packages\scipy\optimize\_minpack_py.py:906: OptimizeWarning: Covariance of the parameters could not be estimated
+  warnings.warn('Covariance of the parameters could not be estimated',
+Pendolo in controfase 2 
+
+117.673029 +- inf
+4.606268 +- inf
+1.893054 +- inf
+543.714256 +- inf
+6822526840.292118 +- inf
+Chi_square= 96.451 p_value= 0.0 Degrees of freedom= 192
+Chi_square= 305.909 p_value= 0.0 Degrees of freedom= 192
 
 
 P_5
-[90, 4.4, 0.08, -0.01, 1.5707963267948966, 490, 60]
-88.4 +- 0.135
-4.527 +- 0.0
-0.083 +- 0.0
--0.06 +- 0.001
-1.596 +- 0.001
-505.929 +- 0.041
-65.658 +- 0.17
-[90, 4.4, 0.07, -0.3, 0, 490, 70]
-81.365 +- 0.114
-4.523 +- 0.0
-0.083 +- 0.0
--1.461 +- 0.001
-0.015 +- 0.002
-524.996 +- 0.041
-71.324 +- 0.188
-Chi_square= 30104.973 p_value= 0.0 Degrees of freedom= 1940
-Chi_square= 22325.967 p_value= 0.0 Degrees of freedom= 1940
+[90, 4.4, 0.08, -0.01, 1.5707963267948966, 490]
+Battimenti pendolo 1 
 
-def x_t_beats(t,A0,wp,wb,phip,phib,c,tau):
+70.230238 +- 1.236598
+4.586131 +- 0.000771
+0.07476 +- 0.001968
+-0.642009 +- 0.00513
+1.731069 +- 0.001629
+506.90842 +- 0.052322
+[90, 4.4, 0.07, -0.3, 0, 490]
+Battimenti pendolo 2 
 
-    x=(2*A0*(np.e**(-t/tau))*np.cos(wp*t+phip)*np.cos(wb*t+phib))+c
+83.972028 +- 0.828727
+4.539031 +- 0.00071
+0.067537 +- 0.001563
+-1.509852 +- 0.004593
+0.295468 +- 0.021662
+525.25044 +- 0.067519
+Chi_square= 785.328 p_value= 0.0 Degrees of freedom= 152
+Chi_square= 128.799 p_value= 0.086 Degrees of freedom= 152
+w0 Pendolo singolo (Teoria)= 4.459 +- 0.018
+Previsione battimenti:
 
-    return x
+Exp_wp= 4.520569795373102 sigma_Exp_wp= 0.00036247619414570426 wp= 4.586130998458531 sigma_wp= 0.0007709773027941159
+Exp_wb= -0.08132927058659778 sigma_Exp_wb= 0.00036247619414570426 wb= 0.07475982762350183 sigma_wb= 0.0019682338825916627
