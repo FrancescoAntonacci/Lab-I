@@ -1,0 +1,16 @@
+#Parallelepiped
+a=0.281 #lenght
+s_a=0.001
+
+b=0.034#thickness
+s_b=0.001 
+c=0.034 
+s_c=0.001
+
+# Distance suspension-upper surface
+l0=1.073 
+s_l0=0.001#This uncertainty can be manipulated: the measure was quite difficult
+
+#Distance suspension-CM
+l=l0+b/2
+s_l=np.sqrt(s_l0**2+ s_b**2)
