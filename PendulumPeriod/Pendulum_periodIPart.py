@@ -7,10 +7,6 @@ from scipy.stats import chi2
 ## Functions
 
 
-
-def linear_function(x, m, q):
-    return m * x + q
-
 def mean_and_sample_sigma(v):
     """
     this function calculates the sample standard deviation
@@ -48,16 +44,7 @@ def x2_p_value(res,s_y,n_par):
 
     return p_value,x2
 
-def sy_eff(m,x,sx,sy):
-    '''
-    Questa funzione vuole verificare le ipotesi di best fit di curve fit
-    ritorna il vettore delle sigma y efficaci
 
-    '''
-
-    sy_eff=np.sqrt((m*sx)**2+sy**2) # to be adjusted
-
-    return sy_eff
 
 ## Other functions
 
@@ -69,12 +56,13 @@ def v(w,l,tc,d):
     return v
 
 
-def s_v(w,l,tc,d,s_w,s_l,s_d,s_tc):
+def s_v(w,l,tc,dcmf,s_w,s_l,s_dcmf,s_tc):
     '''
     uncertanty on the velocity of  the flag in the lowest potential energy point.
     '''
-    s_v= np.sqrt((l*s_w/(tc*d))**2+(w*s_l/(tc*d))**2+(w*l*s_tc/((tc**2)*d))**2+(w*l*s_d/((d**2)*tc))**2)
+    s_v= np.sqrt((l*s_w/(tc*(dcmf+l)))**2+(w*dcmf*s_l/(tc*(dcmf+l)**2))**2+(w*l*s_tc/((tc**2)*(dcmf+l)))**2+(w*l*s_dcmf/(((dcmf+l)**2)*tc))**2)##
     return s_v
+
 
 
 def theta(w,l,tc,d,g):
@@ -82,19 +70,21 @@ def theta(w,l,tc,d,g):
     theta massimo per oscillazione
     '''
     theta=np.arccos(1-(v(w,l,tc,d)**2)/(2*g*l))
-    s_theta=1 #Da completare
+
     return theta
 
-def T(l,g,theta,s_l,s_g,s_theta):
+def T(theta0,k,a1,a2,a3):
     '''
     Taylor series expansion of the period given the maximum angle
     '''
-    a1=1
-    a2=1/16
-    a3=11/3072
-    theta,s_theta=theta(W,l,tc,d,g)
-    T=np.pi*2*np.sqrt(l/g)*(a1+a2*theta**2+a3*theta**4)
-    return
+    # a1=1
+    # a2=1/16       THIS IS WHAT WE EXPECT
+    # a3=11/3072
+
+
+
+    T=np.pi*2*np.sqrt(k)*(a1+a2*theta0**2+a3*theta0**4)
+    return T
 
 def exp(t,v0,lam):
     '''
@@ -104,8 +94,7 @@ def exp(t,v0,lam):
     return v
 
 
-
-##Dimensions
+## Dimensions
 
 #Parallelepiped
 a=0.281 #lenght
@@ -116,21 +105,9 @@ s_b=0.001
 c=0.034
 s_c=0.001
 
-# # Distance suspension-upper surface
-# l0=1.073
-# s_l0=0.005#This uncertainty can be manipulated: the measure was quite difficult
-
-# Distance lower surface- flagù
-
-
 #Dimensions flag
 w=0.01980
 s_w=0.00005
-
-#  ACCORDING TO OLD MEASURES
-# #Distance suspension-CM
-# l=l0+b/2
-# s_l=np.sqrt(s_l0**2+ (s_b/2)**2)
 
 #Distance suspension-CM
 l=1.087
@@ -146,12 +123,13 @@ s_dcmf=0.001
 d=l+dcmf
 s_d=np.sqrt(s_l**2+s_dcmf**2)
 
+##PART 1 maxv-time
 
-##
+##Data from Arduino
 
-file_path=r"C:/Users/zoom3/Documents/Unipi/Laboratorio I/LaboratoryReports/PendulumPeriod/data11042024/p1.txt"
+file_path1=r"C:/Users/zoom3/Documents/Unipi/Laboratorio I/LaboratoryReports/PendulumPeriod/data11042024/p1.txt"
 
-time, period, transit_time=np.loadtxt(file_path,skiprows=4, unpack=True)
+time, period, transit_time=np.loadtxt(file_path1,skiprows=4, unpack=True)
 
 s_time_arduino=0.000001# due to arduino specs
 
@@ -160,38 +138,65 @@ s_period=np.full_like(time, s_time_arduino)
 s_transit_time=np.full_like(time, s_time_arduino)
 
 
-## Data acquisition
+## Data manipulation
 
 
-
-Mv= w*l/(transit_time*d)
-s_Mv= s_v(w,l,transit_time,d,s_w,s_l,s_d,s_transit_time)
-
-theta0=theta(w,l,transit_time,d,9.8)
+#max velocity
+maxv= w*l/(transit_time*d)  #It is observed that considering the circumference is useless
+s_maxv= s_v(w,l,transit_time,d,s_w,s_l,s_d,s_transit_time)
 
 
-##Best-fit
-popt,pcov=curve_fit(exp,time,Mv,p0=(2.5,-1/370),sigma=s_Mv,absolute_sigma=True)
+## Best fit
+
+popt1,pcov1=curve_fit(exp,time,maxv,p0=(2.5,-1/370),sigma=s_maxv,absolute_sigma=True)
+
+v0,lam=popt1
+s_v0,s_lam=np.sqrt(pcov1.diagonal())
+
+tau=-1/lam
+s_tau= s_lam/lam**2
+
+print("\n v0=",round(v0,4),"+-",round(s_v0,4))
+print("\n lam=",round(lam,6),"+-",round(s_lam,6))
+print("\n tau=",round(tau,3),"+-",round(s_tau,3))
+
+# X2 and residual first part
+
+res1=residuals(exp,popt1,maxv,time)
+x2_p_value(res1,s_maxv,np.size(popt1))
+
+##Plot exp
+
+plt.figure("Plot exp",figsize=(10, 10))
 
 
-print(popt,pcov)
-
-
-##Plots
-
-
-plt.figure()
-
-plt.errorbar(time,Mv,s_Mv)
+#plotting variables
 xx=np.linspace(min(time),max(time),10000)
-yy= exp(xx,*popt)
-plt.plot(xx,yy)
+
+
+plt.errorbar(time,maxv,s_maxv,s_time,fmt='.',label='Dati raccolti')
+plt.errorbar(xx,exp(xx, v0, lam), label="Previsione modello")
+
+
+plt.xlabel('$t[s]$')
+plt.ylabel('$v_{max}[m/s]$')
+plt.legend(fontsize='large')
+plt.grid(True)
+
+##Plot res exp
+plt.figure("Residuals_exponential_law",figsize=(10, 10))
+
+
+#plotting variables
+xx=np.linspace(min(time),max(time),10000)
+
+plt.errorbar(time,res1/s_maxv,1,fmt='.',label='residui')
+
+
+
+plt.xlabel('$t[s]$')
+plt.ylabel('$residui[m/s]$')
+plt.legend(fontsize='large')
+plt.grid(True)
 
 plt.show()
-
-res1=residuals(exp,popt,Mv,time)
-
-x2_p_value(res1,s_Mv,np.size(popt))
-
-
-

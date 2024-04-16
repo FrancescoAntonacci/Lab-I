@@ -82,19 +82,18 @@ def theta(w,l,tc,d,g):
     theta massimo per oscillazione
     '''
     theta=np.arccos(1-(v(w,l,tc,d)**2)/(2*g*l))
-    s_theta=1 #Da completare
+
     return theta
 
-def T(l,g,theta,s_l,s_g,s_theta):
+def T(theta,l,g):
     '''
     Taylor series expansion of the period given the maximum angle
     '''
     a1=1
     a2=1/16
-    a3=11/3072
-    theta,s_theta=theta(W,l,tc,d,g)
+    a3=0#11/3072
     T=np.pi*2*np.sqrt(l/g)*(a1+a2*theta**2+a3*theta**4)
-    return
+    return T
 
 def exp(t,v0,lam):
     '''
@@ -149,7 +148,7 @@ s_d=np.sqrt(s_l**2+s_dcmf**2)
 
 ##
 
-file_path=r"C:/Users/zoom3/Documents/Unipi/Laboratorio I/LaboratoryReports/PendulumPeriod/data11042024/p1.txt"
+file_path=r"C:/Users/zoom3/Documents/Unipi/Laboratorio I/LaboratoryReports/PendulumPeriod/data11042024/p2.txt"
 
 time, period, transit_time=np.loadtxt(file_path,skiprows=4, unpack=True)
 
@@ -171,20 +170,20 @@ theta0=theta(w,l,transit_time,d,9.8)
 
 
 ##Best-fit
-popt,pcov=curve_fit(exp,time,Mv,p0=(2.5,-1/370),sigma=s_Mv,absolute_sigma=True)
 
+popt2,pcov2=curve_fit(T,theta0,period,sigma=s_period,absolute_sigma=True)
 
-print(popt,pcov)
-
+popt264
 
 ##Plots
 
 
 plt.figure()
 
-plt.errorbar(time,Mv,s_Mv)
-xx=np.linspace(min(time),max(time),10000)
-yy= exp(xx,*popt)
+plt.errorbar(theta0,period,s_period,fmt=".")
+
+xx=np.linspace(min(theta0),max(theta0),100000)
+yy=T(xx,*popt)
 plt.plot(xx,yy)
 
 plt.show()
@@ -192,6 +191,5 @@ plt.show()
 res1=residuals(exp,popt,Mv,time)
 
 x2_p_value(res1,s_Mv,np.size(popt))
-
 
 
