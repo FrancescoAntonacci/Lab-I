@@ -11,6 +11,18 @@ from scipy.stats import chi2
 def linear_function(x, m, q):
     return m * x + q
 
+
+def sy_eff(m,x,sx,sy):
+    '''
+    Questa funzione vuole verificare le ipotesi di best fit di curve fit
+    ritorna il vettore delle sigma y efficaci
+
+    '''
+
+    sy_eff=np.sqrt((m*sx)**2+sy**2) # to be adjusted
+
+    return sy_eff
+
 def sample_sigma(v):
     """
     this function calculates the sample standard deviation
@@ -84,6 +96,14 @@ class data_set():
             for i in range(0,np.size(self.params1)):
                 print(round(self.params1[i],3),"+-",round(self.s_params1[i],3))
 
+            self.s_y0=self.s_y1
+            for i in range(5):
+
+                self.s_y1=sy_eff(self.params1[0],self.x1,self.s_x1,self.s_y0)
+                self.popt, self.pcov = curve_fit(self.func, self.x1, self.y1,sigma=self.s_x1,absolute_sigma=True)
+                self.params= self.popt
+                self.s_params= np.sqrt(self.pcov.diagonal())
+
 
     def plot(self):
 
@@ -96,9 +116,9 @@ class data_set():
 
                 self.xx1=np.linspace(min(self.x1),max(self.x1),10000)
 
-                plt.plot(self.xx1,self.func(self.xx1,*self.params1),label=self.label1+" previsione modello")
-                plt.xlabel('$t[s]$')
-                plt.ylabel('$[]$')
+                plt.plot(self.xx1,self.func(self.xx1,*self.params1),label="Previsione modello")
+                plt.xlabel('$R\sin{\phi_i}[u.a.]$')
+                plt.ylabel('$R\sin{\phi_r}[u.a.]$')
                 plt.legend(fontsize='large')
                 plt.grid(True)
                 plt.show()
@@ -112,16 +132,16 @@ class data_set():
 
         if (np.size(list(self.label1))>0):
 
-            plt.figure(self.label1+" residuals",figsize=(10, 10))
+            plt.figure(self.label1+" Residui",figsize=(10, 10))
 
             self.res1=residuals(self.func,self.params1,self.y1,self.x1)
             self.dof1=np.size(self.params1)
             self.p_value,self.x21=x2_p_value(self.res1,self.s_y1,self.dof1)
 
-            plt.errorbar(self.x1,self.res1,self.s_y1,fmt=".",label=self.label1+" residuals")
+            plt.errorbar(self.x1,self.res1/self.s_y1,fmt=".",label="Residui")
 
-            plt.xlabel('$x[s]$')
-            plt.ylabel('$y[]$')
+            plt.xlabel('$R\sin{\phi_i}[u.a.]$')
+            plt.ylabel('$residuals/\sigma[u.a.]$')
             plt.legend(fontsize='large')
             plt.grid(True)
             plt.show()
@@ -133,9 +153,12 @@ class data_set():
 file_path=r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Lens\ndata1.txt"
 
 
+## Uncertainties
+s_x=1/np.sqrt(12)
+s_y=1/np.sqrt(12)
 ##
 
-data1=data_set(file_path,"punti",linear_function,1,1)
+data1=data_set(file_path,"Dati raccolti",linear_function,s_x,s_y)
 data1.p01=[1,0]
 
 ##

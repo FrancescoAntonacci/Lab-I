@@ -52,7 +52,6 @@ def sy_eff(m,x,sx,sy):
     '''
     Questa funzione vuole verificare le ipotesi di best fit di curve fit
     ritorna il vettore delle sigma y efficaci
-
     '''
 
     sy_eff=np.sqrt((m*sx)**2+sy**2) # to be adjusted
@@ -67,13 +66,13 @@ class data_set():
         self.x1,self.y1=np.loadtxt(path,unpack=True)
 
 
-        self.s_x1=np.full_like(self.x1,s_x)/self.x1**2 # Must be adjusted
+        self.s_x1=100*np.full_like(self.x1,s_x)/self.x1**2 # Must be adjusted
         # self.s_y1=np.full_like(self.y1,s_y)/self.y1**2 # Must be adjusted
-        self.s_y1=np.linspace(0.5,s_y,np.size(s_y))/self.y1**2 # Must be adjusted
+        self.s_y1=100*np.linspace(0.5,s_y,np.size(s_y))/self.y1**2 # Must be adjusted
 
 
-        self.x1=1/self.x1
-        self.y1=1/self.y1
+        self.x1=100/self.x1
+        self.y1=100/self.y1
 
 
 
@@ -121,9 +120,9 @@ class data_set():
 
                 self.xx1=np.linspace(min(self.x1),max(self.x1),10000)
 
-                plt.plot(self.xx1,self.func(self.xx1,*self.params1),label=self.label1+" previsione modello")
-                plt.xlabel('$t[]$')
-                plt.ylabel('$[]$')
+                plt.plot(self.xx1,self.func(self.xx1,*self.params1),label="Previsione modello")
+                plt.xlabel('$x[m^-1]$')
+                plt.ylabel('$y[m^-1]$')
                 plt.legend(fontsize='large')
                 plt.grid(True)
                 plt.show()
@@ -137,16 +136,16 @@ class data_set():
 
         if (np.size(list(self.label1))>0):
 
-            plt.figure(self.label1+" residuals",figsize=(10, 10))
+            plt.figure(self.label1+" Residuilen",figsize=(10, 10))
 
             self.res1=residuals(self.func,self.params1,self.y1,self.x1)
             self.dof1=np.size(self.params1)
             self.p_value,self.x21=x2_p_value(self.res1,self.s_y1,self.dof1)
 
-            plt.errorbar(self.x1,self.res1,self.s_y1,fmt=".",label=self.label1+"residuals")
+            plt.errorbar(self.x1,self.res1/self.s_y1,fmt=".",label="Residui")
 
-            plt.xlabel('$x[]$')
-            plt.ylabel('$y[]$')
+            plt.xlabel('$x[m^-1]$')
+            plt.ylabel('$residuals/\sigma$')
             plt.legend(fontsize='large')
             plt.grid(True)
             plt.show()
@@ -160,7 +159,10 @@ file_path=r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Lens\
 
 ##
 
-data1=data_set(file_path,"punti",linear_function,0.5,1.5)
+s_p=0.5/np.sqrt(12)
+s_q=1
+
+data1=data_set(file_path,"Dati raccolti",linear_function,s_p,s_q)
 data1.p01=[1,0]
 
 ##
@@ -168,3 +170,5 @@ data1.p01=[1,0]
 data1.fit()
 data1.plot()
 data1.x2_res_p()
+
+print("f=",1/(data1.params[1]),"+-",(data1.s_params[1])/(data1.params[1]**2))
