@@ -52,10 +52,10 @@ Dove  $g $ è l'accelerazione di gravità.
 Il periodo delle oscillazioni di un pendolo in funzione dell'ampiezza delle oscillazioni è descritto dalla seguente equazione:
 
 \begin{equation}
-T = \sqrt{\frac{d}{g}} (a_1+a_2\theta^2+a_3\theta^4+ o( \theta^4 ))
+T = 2\pi (a_1+a_2\theta^2+a_3\theta^4+ o( \theta^4 ))
 \label{eq:tht}
 \end{equation}
-Dove è possibile dimostrare che $a_1=1$, $a_2=\frac{1}{16}$, $a_3=\frac{11}{3072}$.
+Dove è possibile dimostrare che $a_1=\sqrt{\frac{l}{g}}$, $a_2=\frac{1}{16}\sqrt{\frac{l}{g}}$, $a_3=\frac{11}{3072}\sqrt{\frac{l}{g}}$.
 
 
 
@@ -156,7 +156,7 @@ Segue che non è possibile fare il test del $\chi^2$.
 \subsection{Variazione del periodo in funzione dell'angolo massimo}
 
 E' stato ripetuto il fit descritto nella sezione($\ref{sez:vt}$) su un campionameto di dati diverso, per poter considerare oscillazioni di maggiore ampiezza. Grazie alla relazione($\ref{eq:thmax}$) è stata fatta la stima degli angoli massimi.
-E' stato fatto il fit ai minimi quadrati dell'equazione ($\ref{eq:tht}$) lasciando come parametri liberi $k=\frac{l}{g}$, ma anche $a_1$,$a_2$,$a_3$.
+E' stato fatto il fit ai minimi quadrati dell'equazione ($\ref{eq:tht}$) lasciando come parametri liberi $a_1$,$a_2$,$a_3$. E' stato fatto il fit anche lasciando solo $a_1$ e $a_2$  come parametri liberi.
 Come variabile indipendente è stato utilizzato l'angolo massimo, stimato secondo l'equazione($\ref{eq:thmax}$); come variabile dipendende sono stati utilizzati i periodi registrati da Arduino.
 Non essendo trascurabili gli errori sulla variabile indipendente è stato utilizzato l'errore efficace iterando l'algoritmo di best-fit.
 
@@ -165,27 +165,26 @@ In tabella ($\ref{tab:tht}$) sono riportati i risultati dell'algoritmo di best-f
 \begin{table}[h!]
 
 
-	\centering
-		\begin{tabular}{|cc|}
+	
+		\begin{tabular}{|cccc|}
 		\hline
-
-			$v_0 [m/s]$ & $ 2.6605\pm0.0008$ \\
-			$\lambda[s^{-1}]$ & $-0.003305\pm 0.000005$\\
-			$k[s]$ & $0.12\pm60$\\
-			$a_1$ &  $0.96\pm240$\\
-			$a_2$ & $0.061\pm15$\\
-			$a_3$ & $0.00423\pm1$\\
+			$$ & Modello con 3 parametri & Modello con 2 parametri& Previsione teoria\\
+			$v_0 [m/s]$ & $ 2.6605\pm0.0008$ &  $ 2.6605\pm0.0008$ & \\
+			$\lambda[s^{-1}]$ & $-0.003305\pm 0.000005$ &  $ 2.6605\pm0.0008$ & \\
+			$a_1$ & $0.3353 \pm 0.0002$ &  $0.33496 \pm 0.00003$ & $0.3330\pm0.0002$ \\
+			$a_2$  &  $0.0215\pm0.0007 $ & $0.02301 \pm0.00007$ & $0.20810 \pm 0.00001$\\
+			$a_3$ & $0.0015 \pm 0.0007$ & $$ & $0.0011922\pm0.0000006$\\
 
 		\hline
-
 
 		\end{tabular}
-	\caption{Risultati dell'algoritmo di best fit per l'equazione($\ref{eq:tht}$)}
+	\caption{Sono riportati i risultati dell'algoritmo di best fit per l'equazione($\ref{eq:tht}$) nel caso in cui si usano $a_1$,$a_2$,$a_3$ che nel caso in cui si usa solo $a_1$,$a_2$. Sono riportati i valori che ci aspetta dalla teoria.}
 	\label{tab:tht}
 
 \end{table}
 
-E' stato osservato che se utilizzare tre termini anziché due nello sviluppo della formula del periodo delle oscillazioni del pendolo (equazione($\ref{eq:tht}$)) migliora sensibilmente i residui, aggiungerne un quarto non fa altrettanto:inoltre già il terzo termine dello sviluppo si inizia a discostare dal valore previsto dalla teoria.
+E' stato osservato che se utilizzare tre termini anziché due nello sviluppo della formula del periodo delle oscillazioni del pendolo (equazione($\ref{eq:tht}$)) migliora sensibilmente i residui, aggiungerne un quarto non fa altrettanto e influisce sul modello con un ordine di grandezza inferiore alla a quello barra di errore delle misure sui periodi.
+
 
 \begin{figure}[h!]
 	\includegraphics[width=\textwidth]{plot_Periods-time.png}
@@ -208,14 +207,18 @@ E' stato osservato che se utilizzare tre termini anziché due nello sviluppo del
 
 \subsubsection{Valutazione del modello}
 
+Si confrontano i valori di $a_1$, $a_2$, $a_3$ misurati sperimentalmente con quelli indicati dalla teoria: la teoria e i dati sono incompatibili per $a_1$ (pur differendo tra loro di due centesimi ), sono compatibili per $a_2$ e $a_3$, distando meno di una barra di errore. 
+
+
 Dal grafico dei residui non vi è motivo di rigettare il modello.
-Ciononostante  $\chi^2=28$ , $p_{value}=10^{-8}$, $Dof=88$; segue o che gli errori sono stati sovrastimati, oppure che il modello di fit è stato troppo flessibile.
+Ciononostante  $\chi^2=0.726$ , $p_{value}=0$, $Dof=88$; segue o che gli errori sono stati sovrastimati, oppure che il modello di fit è stato troppo flessibile.
+
 
 
 \section{Conclusione}
 
-
-
+Il modello dell'equazione (\ref{eq:vt}) non è stato verificato: è possibile che sia il modello inadeguato oppure che sia presente un errore sistematico.
+Il modello dell'equazione(\ref{eq:tht}) potrebbe rischiare l'overfitting sulle misure: sarebbero necessarie una più ampia statistica e una migliore misura delle dimensioni fisiche del pendolo, per poter rigettare o verificare il modello.
 
 
 

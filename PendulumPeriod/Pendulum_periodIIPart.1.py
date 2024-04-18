@@ -74,13 +74,24 @@ def theta(w,l,tc,d,g):
     return theta
 
 def s_theta(w,l,d,g,t,s_w,s_l,s_d,s_g,s_t):
-    s_theta=(1/np.sqrt(1-(1-((w**2)*l)/((t**2)*(d**2)*2*g))**2))*np.sqrt(((2*w*l*s_w)/((t**2)*(d**2)*2*g))**2+((2*w**2*s_l)/((t**2)*(d**2)*2*g))**2+ ((w**2*l*s_t)/((t**3)*(d**2)*2*g))**2+((w**2*l*s_d)/((t**2)*(d**3)*2*g))**2+(((w**2)*l*s_g)/((t**2)*(d**2)*2*(g**2)))**2)
+
+    t0=1/np.sqrt(1-(1-((w**2)*l)/((t**2)*(d**2)*2*g))**2)
+    t1=((2*w*l*s_w)/((t**2)*(d**2)*2*g))**2
+    t2=((2*w**2*s_l)/((t**2)*(d**2)*2*g))**2
+    t3=((w**2*l*s_t)/((t**3)*(d**2)*2*g))**2
+    t4=((w**2*l*s_d)/((t**2)*(d**3)*2*g))**2
+    t5=(((w**2)*l*s_g)/((t**2)*(d**2)*2*(g**2)))**2
+
+    s_theta=t0*np.sqrt(t1+t2+t3+t4+t5)
+
+
+
 
     return s_theta
 
 
 
-def T(theta0,k,a1,a2):
+def T(theta0,a1,a2):
     '''
     Taylor series expansion of the period given the maximum angle
     '''
@@ -90,7 +101,7 @@ def T(theta0,k,a1,a2):
 
 
 
-    T=np.pi*2*np.sqrt(k)*(a1+a2*theta0**2)
+    T=np.pi*2*(a1+a2*theta0**2)
     return T
 
 def exp(t,v0,lam):
@@ -185,17 +196,15 @@ s_theta=s_theta(w,l,d,g,transit_time,s_w,s_l,s_d,s_g,s_transit_time)
 ##BEST FIT
 
 
-s_period=np.sqrt(s_period**2+(np.sqrt(l/g)*(theta0/8)*s_theta)**2)
+s_period=np.sqrt(s_period**2+((2*np.pi*np.sqrt(l/g)*(theta0/8)*s_theta)**2))
 
-popt2,pcov2=curve_fit(T,theta0,period,p0=(0.11, 1 ,1/16),sigma=s_period,absolute_sigma=True)
+popt2,pcov2=curve_fit(T,theta0,period,p0=(0.11 ,0.11/16),sigma=s_period,absolute_sigma=True)
 
-k,a1,a2=popt2
-s_k,s_a1,s_a2=np.sqrt(pcov2.diagonal())
-
-
+a1,a2=popt2
+s_a1,s_a2=np.sqrt(pcov2.diagonal())
 
 
-print("\n k=",round(k,6),"+-",round(s_k,6))
+
 print("\n a1=",round(a1,6),"+-",round(s_a1,6))
 print("\n a2=",round(a2,6),"+-",round(s_a2,6))
 
@@ -215,8 +224,7 @@ plt.figure("Plot Periods-Theta",figsize=(10, 10))
 #plotting variables
 xx=np.linspace(min(theta0),max(theta0),10000)
 
-
-plt.errorbar(xx,(T(xx,k,a1,a2)), label="Previsione modello con 2 termini")
+plt.errorbar(xx,(T(xx,a1,a2)), label="Previsione modello con 2 termini")
 
 
 plt.xlabel('$theta$')
@@ -232,7 +240,7 @@ plt.figure("Plot Periods-time",figsize=(10, 10))
 #plotting variables
 xx=np.linspace(min(time),max(time),10000)
 
-plt.errorbar(time,(T(theta0,k,a1,a2)), label="Previsione modello con 2 termini")
+plt.errorbar(time,(T(theta0,a1,a2)), label="Previsione modello con 2 termini")
 
 
 plt.xlabel('$t[s]$')
@@ -249,7 +257,7 @@ plt.figure("Residuals_period_law",figsize=(10, 10))
 #plotting variables
 
 
-plt.errorbar(time,res2/s_period,1,fmt='.',label='residui con 2 termini')
+plt.errorbar(time,res2/s_period,fmt='.',label='residui con 2 termini')
 
 
 

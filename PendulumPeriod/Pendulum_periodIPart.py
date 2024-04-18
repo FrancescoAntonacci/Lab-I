@@ -127,7 +127,7 @@ s_d=np.sqrt(s_l**2+s_dcmf**2)
 
 ##Data from Arduino
 
-file_path1=r"C:/Users/zoom3/Documents/Unipi/Laboratorio I/LaboratoryReports/PendulumPeriod/data11042024/p1.txt"
+file_path1=r"C:/Users/zoom3/Documents/Unipi/Laboratorio I/LaboratoryReports/PendulumPeriod/data11042024/p2.txt"
 
 time, period, transit_time=np.loadtxt(file_path1,skiprows=4, unpack=True)
 
