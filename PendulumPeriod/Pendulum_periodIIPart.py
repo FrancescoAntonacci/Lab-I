@@ -215,7 +215,7 @@ x2_p_value(res2,s_period,np.size(popt1))
 
 ##
 
-plt.figure("Plot Periods-Theta",figsize=(10, 10))
+plt.figure("Plot Periods-Theta")
 
 
 #plotting variables
@@ -233,7 +233,7 @@ plt.grid(True)
 
 ## COME SI GODE QUANDO LAB 1 TORNA
 
-plt.figure("Plot Periods-time",figsize=(10, 10))
+plt.figure("Plot Periods-time")
 
 
 #plotting variables
@@ -247,11 +247,13 @@ plt.xlabel('$t[s]$')
 plt.ylabel('$T[s]$')
 plt.legend(fontsize='large')
 plt.grid(True)
-##Plot res exp
+
+
+##Plot res
 
 
 
-plt.figure("Residuals_period_law",figsize=(10, 10))
+plt.figure("Residuals_period_law")
 
 
 #plotting variables

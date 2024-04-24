@@ -36,7 +36,7 @@ Dove $w$ è l'ampiezza della bandierina, $l$ è la distanza centro di massa-punt
 Assunto che l'attrito viscoso sia proporzionale alla velocità massima $v(t)$ con la quale un pendolo oscilla, la $v(t)$  decresce esponenzialmente con un coefficiente di smorzamento $\lambda$. Data $v_0$ la velocità iniziale è valida:  
 
 \begin{equation}
-v(t) = v_0 e^{\lambda t}
+v(t) = v_0 e^{-\lambda t}
 \label{eq:vt}
 \end{equation}
 
@@ -103,7 +103,7 @@ In tabella($\ref{tab:dimpar}$) riportiamo le misure raccolte relative alle dimen
 
 \end{table}
 
-E' stato lasciato oscillare il pendolo più volte e partendo da diverse ampeizze iniziali e da Arduino sono stati acquisiti: tempo di transito, periodo di oscillazione, tempo rispetto all'avvio delle misure.
+E' stato lasciato oscillare il pendolo più volte e partendo da diverse ampiezze iniziali e da Arduino sono stati acquisiti: tempo di transito, periodo di oscillazione, tempo rispetto all'avvio delle misure.
 
 
 
@@ -114,8 +114,8 @@ E' stato lasciato oscillare il pendolo più volte e partendo da diverse ampeizze
 \subsection{Smorzamento della velocità di oscillazione}
 \label{sez:vt}
 
-Si fa un fit ai minimi quadrati dell'equazione ($\ref{eq:vt}$) lasciando $v_0$ e $\lambda$ come parametri liberi.
-Si verifica che l'influenza dell'incertezza sui tempi è cinque ordini di grandezza più piccola dell'incertezza sulle velocità misurate: di conseguenza i tempi saranno la variabile indipendente.
+E' stato fatto un fit ai minimi quadrati dell'equazione ($\ref{eq:vt}$) lasciando $v_0$ e $\lambda$ come parametri liberi.
+E' stato verificato che l'influenza dell'incertezza sui tempi è cinque ordini di grandezza più piccola dell'incertezza sulle velocità misurate: di conseguenza i tempi saranno la variabile indipendente.
 In tabella ($\ref{tab:vt}$) sono riportati i risultati dell'algoritmo di best-fit.
 
 \begin{table}[h!]
@@ -124,20 +124,19 @@ In tabella ($\ref{tab:vt}$) sono riportati i risultati dell'algoritmo di best-fi
 			\hline
 
 			$v_0$ [m/s] &  $\lambda [s^{-1}$] & $\tau[s]$ 	\\
-			$0.4967 \pm 0.0001$	 & 	$2533 10^{-6} \pm 2 10^{-6}$ 	& $394.8\pm0.3$\\
+			$0.4967 \pm 0.0001$	 & 	$2533 \times 10^{-6} \pm 2 \times 10^{-6}$ 	& $394.8\pm0.3$\\
 			\hline
 			
 		\end{tabular}
-		
-		\label{tab:vt}	
 		\caption{Risultati dell'algoritmo di best fit per l'equazione($\ref{eq:vt}$)} 
+            \label{tab:vt}	
 \end{table}
 
 In figura(\ref{fig:vt}) sono riportati i dati sperimentali considerati in questa sezione e la previsione del modello teorico, in figura (\ref{fig:vtres}) è riportato il grafico dei residui.
 
 \begin{figure}[h!]
 	\includegraphics[width=\textwidth]{plot_exp.png}
-	\caption{Dati sperimentali e previsione del modello teorico coi parametri di best-fit.}
+	\caption{Dati sperimentali e previsione del modello teorico(equazione (\ref{eq:vt})) coi parametri di best-fit.}
 	\label{fig:vt}
 \end{figure}
 
@@ -155,10 +154,10 @@ Segue che non è possibile fare il test del $\chi^2$.
 
 \subsection{Variazione del periodo in funzione dell'angolo massimo}
 
-E' stato ripetuto il fit descritto nella sezione($\ref{sez:vt}$) su un campionameto di dati diverso, per poter considerare oscillazioni di maggiore ampiezza. Grazie alla relazione($\ref{eq:thmax}$) è stata fatta la stima degli angoli massimi.
+E' stato ripetuto il fit descritto nella sezione($\ref{sez:vt}$) su un campionamento di dati diverso, per poter considerare oscillazioni di maggiore ampiezza. Grazie alla relazione($\ref{eq:thmax}$) è stata fatta la stima degli angoli massimi.
 E' stato fatto il fit ai minimi quadrati dell'equazione ($\ref{eq:tht}$) lasciando come parametri liberi $a_1$,$a_2$,$a_3$. E' stato fatto il fit anche lasciando solo $a_1$ e $a_2$  come parametri liberi.
-Come variabile indipendente è stato utilizzato l'angolo massimo, stimato secondo l'equazione($\ref{eq:thmax}$); come variabile dipendende sono stati utilizzati i periodi registrati da Arduino.
-Non essendo trascurabili gli errori sulla variabile indipendente è stato utilizzato l'errore efficace iterando l'algoritmo di best-fit.
+Come variabile indipendente è stato utilizzato l'angolo massimo, stimato secondo l'equazione($\ref{eq:thmax}$); come variabile dipendente sono stati utilizzati i periodi registrati da Arduino.
+Non essendo trascurabili gli errori sulla variabile indipendente, è stato utilizzato l'errore efficace iterando l'algoritmo di best-fit.
 
 In tabella ($\ref{tab:tht}$) sono riportati i risultati dell'algoritmo di best-fit.
 
@@ -169,11 +168,11 @@ In tabella ($\ref{tab:tht}$) sono riportati i risultati dell'algoritmo di best-f
 		\begin{tabular}{|cccc|}
 		\hline
 			$$ & Modello con 3 parametri & Modello con 2 parametri& Previsione teoria\\
-			$v_0 [m/s]$ & $ 2.6605\pm0.0008$ &  $ 2.6605\pm0.0008$ & \\
-			$\lambda[s^{-1}]$ & $-0.003305\pm 0.000005$ &  $ 2.6605\pm0.0008$ & \\
-			$a_1$ & $0.3353 \pm 0.0002$ &  $0.33496 \pm 0.00003$ & $0.3330\pm0.0002$ \\
-			$a_2$  &  $0.0215\pm0.0007 $ & $0.02301 \pm0.00007$ & $0.20810 \pm 0.00001$\\
-			$a_3$ & $0.0015 \pm 0.0007$ & $$ & $0.0011922\pm0.0000006$\\
+			$v_0 [m/s]$ & $ 26605\times 10^{-4}\pm 8\times 10^{-4}$ &  $ 26605 \times 10^{-4} \pm8\times 10^{-4}$ & \\
+			$\lambda[s^{-1}]$ & $-3305 \times 10^{-6}\pm 5\times 10^{-6} $ &  $ 26605 \times 10^{-4} \pm 8\times 10^{-4}$ & \\
+			$a_1$ & $3353\times 10^{-4} \pm 2\times 10^{-4}$ &  $33496\times 10^{-5} \pm 3 \times 10^{-5}$ & $3330\times 10^{-4}\pm 2\times 10^{-4}$ \\
+			$a_2$  &  $215 \times 10^{-4}\pm7 \times 10^{-4}$ & $2301 \times 10^{-5}\pm7  \times 10^{-5}$ & $20810\times 10^{-5} \pm 1\times 10^{-5}$\\
+			$a_3$ & $15\times 10^{-4} \pm 7\times 10^{-4}$ & $$ & $11922\times 10^{-7}\pm 6 \times 10^{-7}$\\
 
 		\hline
 
@@ -185,16 +184,14 @@ In tabella ($\ref{tab:tht}$) sono riportati i risultati dell'algoritmo di best-f
 
 E' stato osservato che se utilizzare tre termini anziché due nello sviluppo della formula del periodo delle oscillazioni del pendolo (equazione($\ref{eq:tht}$)) migliora sensibilmente i residui, aggiungerne un quarto non fa altrettanto e influisce sul modello con un ordine di grandezza inferiore alla a quello barra di errore delle misure sui periodi.
 
+In figura(\ref{fig:pth}) sono stati riportati i dati dei periodi delle oscillazioni rispetto agli angoli massimi con le previsioni del modello dell'equazione(\ref{eq:tht}) con 2 e con 3 termini; in figura(\ref{fig:ptres}) si trova il corrispondente grafico dei residui.
+In figura(\ref{fig:pt}) sono stati riportati i dati sperimentali del periodo del pendolo rispetto al tempo trascorso e le previsioni del modello delle equazioni(\ref{eq:thmax}) e  (\ref{eq:tht}) con 2 e 3 termini.
 
-\begin{figure}[h!]
-	\includegraphics[width=\textwidth]{plot_Periods-time.png}
-	\caption{Periodo di oscillazione del pendolo in funzione del tempo trascorso.}
-	\label{fig:pt}
-\end{figure}
+
 
 \begin{figure}[h!]
 	\includegraphics[width=\textwidth]{Plot_Periods-Theta.png}
-	\caption{Periodo del pendolo in funzione dell'apertura massima}
+	\caption{Periodo del pendolo in funzione dell'apertura massima. Il modello utilizzato è quello dell'equazione({\ref{eq:tht}}) con i parametri di best fit. }
 	\label{fig:pth}
 \end{figure}
 
@@ -204,10 +201,15 @@ E' stato osservato che se utilizzare tre termini anziché due nello sviluppo del
 	\label{fig:ptres}
 \end{figure}
 
+\begin{figure}[h!]
+	\includegraphics[width=\textwidth]{plot_Periods-time.png}
+	\caption{Periodo di oscillazione del pendolo in funzione del tempo trascorso.}
+	\label{fig:pt}
+\end{figure}
 
 \subsubsection{Valutazione del modello}
 
-Si confrontano i valori di $a_1$, $a_2$, $a_3$ misurati sperimentalmente con quelli indicati dalla teoria: la teoria e i dati sono incompatibili per $a_1$ (pur differendo tra loro di due centesimi ), sono compatibili per $a_2$ e $a_3$, distando meno di una barra di errore. 
+Si confrontano i valori di $a_1$, $a_2$, $a_3$ misurati sperimentalmente con quelli indicati dalla teoria: la teoria e i dati sono tra loro incompatibili per $a_1$ (pur differendo tra loro di due centesimi ); distando meno di una barra di errore, sono compatibili per $a_2$ e $a_3$, . 
 
 
 Dal grafico dei residui non vi è motivo di rigettare il modello.
@@ -217,7 +219,7 @@ Ciononostante  $\chi^2=0.726$ , $p_{value}=0$, $Dof=88$; segue o che gli errori 
 
 \section{Conclusione}
 
-Il modello dell'equazione (\ref{eq:vt}) non è stato verificato: è possibile che sia il modello inadeguato oppure che sia presente un errore sistematico.
+Il modello dell'equazione (\ref{eq:vt}) non è stato verificato: è possibile che sia il modello inadeguato (ad esempio potrebbe essere necessario considerare l'attrito dipendente dipendente non linearmente dalla velocità) oppure che sia presente un errore sistematico.
 Il modello dell'equazione(\ref{eq:tht}) potrebbe rischiare l'overfitting sulle misure: sarebbero necessarie una più ampia statistica e una migliore misura delle dimensioni fisiche del pendolo, per poter rigettare o verificare il modello.
 
 

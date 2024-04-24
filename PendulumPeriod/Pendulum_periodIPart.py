@@ -127,7 +127,7 @@ s_d=np.sqrt(s_l**2+s_dcmf**2)
 
 ##Data from Arduino
 
-file_path1=r"C:/Users/zoom3/Documents/Unipi/Laboratorio I/LaboratoryReports/PendulumPeriod/data11042024/p2.txt"
+file_path1=r"C:/Users/zoom3/Documents/Unipi/Laboratorio I/LaboratoryReports/PendulumPeriod/data11042024/p1.txt"
 
 time, period, transit_time=np.loadtxt(file_path1,skiprows=4, unpack=True)
 
@@ -167,7 +167,7 @@ x2_p_value(res1,s_maxv,np.size(popt1))
 
 ##Plot exp
 
-plt.figure("Plot exp",figsize=(10, 10))
+plt.figure("Plot exp")
 
 
 #plotting variables
@@ -184,18 +184,18 @@ plt.legend(fontsize='large')
 plt.grid(True)
 
 ##Plot res exp
-plt.figure("Residuals_exponential_law",figsize=(10, 10))
+plt.figure("Residuals_exponential_law")
 
 
 #plotting variables
 xx=np.linspace(min(time),max(time),10000)
 
-plt.errorbar(time,res1/s_maxv,1,fmt='.',label='residui')
+plt.errorbar(time,res1/s_maxv,fmt='.',label='residui')
 
 
 
 plt.xlabel('$t[s]$')
-plt.ylabel('$residui[m/s]$')
+plt.ylabel('$residui/\sigma_V$')
 plt.legend(fontsize='large')
 plt.grid(True)
 
