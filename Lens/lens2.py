@@ -4,6 +4,29 @@ from matplotlib import pyplot as plt
 from scipy.optimize import curve_fit
 from scipy import stats
 from scipy.stats import chi2
+
+
+
+
+## Setting plot params
+
+fontsize=20
+
+params = {
+    'figure.figsize': (8*1.618,8),  # Figure size
+    'axes.labelsize': fontsize,       # Axis label size
+    'axes.titlesize': fontsize,       # Title size
+    'xtick.labelsize': fontsize,      # X-axis tick label size
+    'ytick.labelsize': fontsize,      # Y-axis tick label size
+    'legend.fontsize': fontsize,      # Legend font size
+    'lines.linewidth': 2,       # Line width
+    'grid.linewidth': 1,        # Grid line width
+    'grid.alpha': 0.5,          # Grid transparency
+    'savefig.dpi': 600,         # Resolution of saved figures
+    'savefig.transparent': True # Save figures with transparent background
+}
+
+plt.rcParams.update(params)
 ## Functions
 
 
@@ -110,16 +133,16 @@ class data_set():
 
             if (np.size(list(self.label1))>0):
 
-                plt.figure(self.label1,figsize=(10, 10))
+                plt.figure(self.label1)
 
                 plt.errorbar(self.x1,self.y1,self.s_y1,self.s_x1,fmt=".",label=self.label1)
 
                 self.xx1=np.linspace(min(self.x1),max(self.x1),10000)
 
-                plt.plot(self.xx1,self.func(self.xx1,*self.params1),label="Previsione modello")
+                plt.plot(self.xx1,self.func(self.xx1,*self.params1),label="Previsione best-fit")
                 plt.xlabel('$R\sin{\phi_i}[u.a.]$')
                 plt.ylabel('$R\sin{\phi_r}[u.a.]$')
-                plt.legend(fontsize='large')
+                plt.legend()
                 plt.grid(True)
                 plt.show()
                 # plt.savefig(self.label1)
@@ -132,17 +155,17 @@ class data_set():
 
         if (np.size(list(self.label1))>0):
 
-            plt.figure(self.label1+" Residui",figsize=(10, 10))
+            plt.figure(self.label1+" Residui")
 
             self.res1=residuals(self.func,self.params1,self.y1,self.x1)
             self.dof1=np.size(self.params1)
             self.p_value,self.x21=x2_p_value(self.res1,self.s_y1,self.dof1)
 
-            plt.errorbar(self.x1,self.res1/self.s_y1,fmt=".",label="Residui")
+            plt.errorbar(self.x1,self.res1/self.s_y1,np.full_like(self.x1,1),fmt=".",label="Residui")
 
             plt.xlabel('$R\sin{\phi_i}[u.a.]$')
-            plt.ylabel('$residuals/\sigma[u.a.]$')
-            plt.legend(fontsize='large')
+            plt.ylabel('$residui/\sigma[u.a.]$')
+            plt.legend()
             plt.grid(True)
             plt.show()
             # plt.savefig(self.label1+"_residuals")

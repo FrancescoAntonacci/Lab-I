@@ -4,7 +4,7 @@
 \usepackage{float}
 \usepackage{hyperref}
 
-\title{Valutazione sperimentale del modello della catenaria per una catena appesa}
+\title{Esperienza di ottica}
 \author{Alessandro Di Meglio \\ Francesco Angelo Fabiano Antonacci}
 \date{\today}
 \begin{document}
@@ -14,19 +14,22 @@
 L'esperienza è suddivisa in due parti:
 
 \begin{enumerate}
-\item Misura indice rifrazione plexiglass;
+\item Misura dell'indice di rifrazione del plexiglas;
 \item misura della focale di una lente divergente.
 
 \end{enumerate}
 
 \section{Cenni teorici}
 
-Dalla legge di Snell, assumendo che l'indice di rifrazione sia approssimabile a 1, otteniamo la segente relazione:
+Dalla legge di Snell, assumendo che l'indice di rifrazione dell'aria sia approssimabile a 1, otteniamo la seguente relazione:
 
 	\begin{equation}
 		n=\frac{sin\theta_i}{sin\theta_r}
 			\label{eq:snell}
 	\end{equation}
+
+Dove n è l'indice di rifrazione del plexiglas, $\theta_i$ è l'angolo incidente del raggio e  $\theta_r$ è l'angolo  rifratto del raggio.
+
 
 Sarà usata la seguente legge per fare i fit:
 		\begin{equation}
@@ -35,9 +38,8 @@ Sarà usata la seguente legge per fare i fit:
 		\end{equation}
 Dove si desidera che q sia compatibile con 0.
 
-Dove n è l'indice di rifrazione, $\theta_i$ è l'angolo incidente del raggio e  $\theta_r$ è l'angolo  rifratto del raggio.
 
-Data una lente la relazione tra f, ossia la distanza focale della lente, p ,la distanza tra il centro della lente e la sorgente luminosa, e q , la distanza tra il centro della lente e l'immagine messa a fuoco, è la legge dei punti coniugati:
+Data una lente la relazione tra $f$, ossia la distanza focale della lente, $p$ ,la distanza tra il centro della lente e la sorgente luminosa, e $q$ , la distanza tra il centro della lente e l'immagine messa a fuoco, è la legge dei punti coniugati:
 
 \begin{equation}
 \frac{1}{f}=\frac{1}{p}+\frac{1}{q}
@@ -49,7 +51,7 @@ Ponendo $\frac{1}{p}=x$ ,  $\frac{1}{q}=y$ e $\frac{1}{f}=c$ otteniamo la seguen
 y=c-mx
 \label{eq::)}
 \end{equation}
-Dove m=1.
+Dove $m=1$.
 
 
  
@@ -63,24 +65,24 @@ Dove m=1.
 \begin{itemize}
 
 \item Banco ottico con sorgente luminosa;
-\item semicilindro di plexiglass;
+\item semicilindro di plexiglas;
 \item carta quadrettata;
 \item cassetta di lenti;
-\item supporto per il plexiglass.
+\item supporto per il plexiglas.
 
 \end{itemize} 
 
 \subsection{Misure di lunghezza}
 
-Le misure prese con il metro a nastro avranno come incertezza la deviazione standard della distribuzione uniforme sull'ampiezza della risoluzione ($1[mm]$).
+Le misure prese con il metro a nastro avranno come incertezza la deviazione standard della distribuzione uniforme sull'ampiezza della risoluzione ($1$[mm]).
 
-Le misure relative al plexiglass sono state prese sulla carta quadrettata in unità arbitrarie, avranno come incertezza la deviazione standard della distribuzione uniforme sull'ampiezza della risoluzione ($1[u.a.]$) .
+Le misure relative al plexiglas sono state prese sulla carta quadrettata in unità arbitrarie, avranno come incertezza la deviazione standard della distribuzione uniforme sull'ampiezza della risoluzione ($1$[u.a.]) .
 
 \section{Descrizione delle misure}
 
-\subsection{Misura indice di rifrazione plexiglass}
+\subsection{Misura indice di rifrazione plexiglas}
  
-E' stato orientato il semicilndro di plexiglass sulla carta quadrettata in modo tale che il raggio luminoso della sorgente passasse dal centro della faccia piana del semicilindro in modo tale che il raggio di luce venisse rifratto solo una volta. 
+E' stato orientato il semicilindro di plexiglas sulla carta quadrettata in modo tale che il raggio luminoso della sorgente passasse dal centro della faccia piana del semicilindro in modo tale che il raggio di luce venisse rifratto solo una volta. 
 Sono state prese più misure delle lunghezze dei cateti proporzionali ai seni  degli angoli che il raggio di luce tracciava sulla carta a diverse orientazioni.
 
 
@@ -93,29 +95,29 @@ Ogni volta è stato messo a fuoco sullo schermo il raggio di luce ed è stata mi
 \subsection{Incertezze delle misure dirette}
 
 
-\subsubsection{Incertezza sulle misure per stimare l'indice del plexiglass}
+\subsubsection{Incertezza sulle misure per stimare l'indice del plexiglas}
 
 Per misurare i cateti dei seni degli angoli sono stati contati i quadretti sulla carta quadrettata.
 Come incertezza è stata adottata la  deviazione standard della distribuzione lineare ampia come la risoluzione dello strumento.
 
 \subsubsection{Incertezza sulle misure delle posizioni delle lenti nella misura della focale della lente}
 
-Come incertezza sulla distanza $p$ tra schermo e lente divergente è stata considerata la deviazione standard della distribuzione uniforme su un intervallo largo quanto lo spessore della lente divergente: $\sigma_p=0.001[m]$.
+Come incertezza sulla distanza $p$ tra schermo e lente divergente è stata considerata la deviazione standard della distribuzione uniforme su un intervallo largo quanto lo spessore della lente divergente: $\sigma_p=0.001$[m].
  Come incertezza sulla distanza $q$ tra schermo è stato necessario stimare l'ampiezza degli intervalli di messa a fuoco e sull'ampiezza massima fare la deviazione standard della distribuzione uniforme.
 
 \section{Analisi dei dati}
  
-\subsection{Misura indice rifrazione plexiglass}
+\subsection{Misura indice rifrazione plexiglas}
 
 Non essendo trascurabile l'errore sulla variabile indipendente sono stati usati gli errori efficaci.
 E' stato fatto un algoritmo di best-fit con i minimi quadrati per la legge($\ref{eq:lin}$).
-Desideriamo che l'intercetta sia compatibile con lo 0: così che l'equazione(\ref{eq:snell}) sia soddisfatta.
+Desideriamo che l'intercetta sia compatibile con lo $0$: così che l'equazione(\ref{eq:snell}) sia soddisfatta.
 Sono riportati in tabella($\ref{tab:plex}$) i risultati dell'algoritmo di best-fit.
 In figura($\ref{fig:plex}$) sono riportati i dati raccolti e la previsione del modello teorico con i parametri ottenuti dall'algoritmo di best-fit.
 In figura ($\ref{fig:plexres}$) è riportato il grafico dei residui.
 
 
-\begin{table}[!h]
+\begin{table}[H]
 		\centering
 			\begin{tabular}{|cc|}
 				\hline
@@ -129,13 +131,13 @@ In figura ($\ref{fig:plexres}$) è riportato il grafico dei residui.
 \end{table}
 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\includegraphics[width=\textwidth]{Dati_raccolti.png}
 	\caption{Dati raccolti e grafico della legge(\ref{eq:lin}) con i parametri ottenuti dall'algoritmo di best-fit.}
 	\label{fig:plex}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\includegraphics[width=\textwidth]{Dati_raccolti_residui.png}
 	\caption{Grafico dei residui della legge(\ref{eq:lin}).}
 	\label{fig:plexres}
@@ -146,7 +148,7 @@ In figura ($\ref{fig:plexres}$) è riportato il grafico dei residui.
 \subsubsection{Valutazione del modello}
 
 In accordo con la teoria l'intercetta è compatibile con 0.
-Dal grafico dei residui non è evidente la presenza di errori sitematici.
+Dal grafico dei residui non è evidente la presenza di errori sistematici.
 Siccome $\chi^2= 7.6$, $p_{value}= 0.47$  e $Dof= 8$,  non vi è motivo rigettare il modello dell'equazione($\ref{eq::)}$).
 
 
@@ -159,12 +161,12 @@ In figura($\ref{fig:len}$) sono riportati i dati raccolti e la previsione del mo
 In figura ($\ref{fig:lenres}$) è riportato il grafico dei residui.
 
 
-\begin{table}[h!]
+\begin{table}[H]
 		\centering
 			\begin{tabular}{|cc|}
 				\hline
-				$c [m^{-1}]$ & $ -2.9 \pm 0.3$\\
-				$f[m]$ & $0.32\pm 0.02$\\
+				$c $[m$^{-1}$] & $ -2.9 \pm 0.3$\\
+				$f$[m] & $0.32\pm 0.02$\\
 				$m$ & $ 1.01 \pm 0.04$\\
 				\hline
 			\end{tabular}
@@ -174,13 +176,13 @@ In figura ($\ref{fig:lenres}$) è riportato il grafico dei residui.
 
 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\includegraphics[width=\textwidth]{Dati_raccoltilen.png}
 	\caption{Dati raccolti e grafico della legge(\ref{eq::)}) con i parametri ottenuti dall'algoritmo di best-fit.}
 	\label{fig:len}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\includegraphics[width=\textwidth]{Dati_raccolti_residuilen.png}
 	\caption{Grafico dei residui della legge(\ref{eq::)}).}
 	\label{fig:lenres}
@@ -188,14 +190,14 @@ In figura ($\ref{fig:lenres}$) è riportato il grafico dei residui.
 
 \subsubsection{Valutazione del modello}
 
-In accordo con la teoria il coefficiente angolare m è compatibile con 1.
-Il grafico dei residui potrebbe suggerire un errore sistematico. La più plausibile causa è la messa a fuoco iniziale inseatta della lente convergente che si ripercuote su tutte le misure.
+In accordo con la teoria il coefficiente angolare $m$ è compatibile con 1.
+Il grafico dei residui potrebbe suggerire un errore sistematico. La più plausibile causa è la messa a fuoco iniziale inesatta della lente convergente che si ripercuote su tutte le misure.
 Siccome $\chi^2= 6.0$, $p_{value}= 0.4$  e $Dof= 6$,  non vi è motivo rigettare il modello dell'equazione($\ref{eq::)}$).
 
 
 \section{Conclusioni}
 
-E' stato misurato l'indice di rifrazione del plexiglass: $n_{plexiglass}= 1.59\pm 0.03$ .
-E' stato misurata la distanza focale della lente divergente: $f=0.32\pm0.02 [m]$
+E' stato misurato l'indice di rifrazione del plexiglas: $n_{plexiglass}= 1.51 \pm 0.03$ .
+E' stato misurata la distanza focale della lente divergente: $f=0.32\pm0.02$ [m]
 
 \end{document}
