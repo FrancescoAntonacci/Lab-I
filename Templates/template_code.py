@@ -7,7 +7,7 @@ from scipy.stats import chi2
 import os
 
 # Specify the directory path you want to change to
-directory_path = r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports"
+directory_path = r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports\Templates"
 
 # Change the current working directory
 os.chdir(directory_path)
@@ -16,9 +16,9 @@ os.chdir(directory_path)
 
 ## Pimp my plot
 
-fontsize=20
+fontsize=14
 params = {
-    'figure.figsize': (8*1.618,8),  # Figure size
+    'figure.figsize': (5*1.618,10),  # Figure size
     'axes.labelsize': fontsize,       # Axis label size
     'axes.titlesize': fontsize,       # Title size
     'xtick.labelsize': fontsize,      # X-axis tick label size
@@ -27,7 +27,7 @@ params = {
     'lines.linewidth': 2,       # Line width
     'grid.linewidth': 1,        # Grid line width
     'grid.alpha': 0.5,          # Grid transparency
-    'savefig.dpi': 600,         # Resolution of saved figures
+    'savefig.dpi': 400,         # Resolution of saved figures
     'savefig.transparent': True, # Save figures with transparent background
     'legend.loc': 'upper right' # Legend location
 
@@ -66,6 +66,8 @@ def x2_p_value(res,s_y,n_par):
 
 ## Fit law- drop it here!
 
+def k(x,m,q):
+    return m*x+q
 
 ## OMEGA CLASS
 class data_set():
@@ -93,52 +95,40 @@ class data_set():
         print("Params:",self.params)
         print("s_params",self.s_params)
 
+
+        self.res=residuals(self.func,self.params,self.y,self.x)
+        self.dof=np.size(self.params)
+        self.p_value,self.x2=x2_p_value(self.res,self.s_y,self.dof)
+
+
     def plot(self):
 
 
-            if (np.size(list(self.label))>0):
+        self.fig, (self.plot_fit,self.plot_res) = plt.subplots(2)
 
-                plt.figure(self.label)
+        self.plot_fit.errorbar(self.x,self.y,self.s_y,self.s_x,fmt=".",label=self.label)
 
-                plt.errorbar(self.x,self.y,self.s_y,self.s_x,fmt=".",label=self.label)
+        self.xx=np.linspace(min(self.x),max(self.x),10000)
+        self.yy=self.func(self.xx,*self.params)
+        self.plot_fit.plot(self.xx,self.yy,label="Previsione best-fit")
 
-                self.xx=np.linspace(min(self.x),max(self.x),10000)
-                self.yy=self.func(self.xx,*self.params)
-                plt.plot(self.xx,self.yy,label="Previsione best-fit")
-                plt.xlabel('$:)$')
-                plt.ylabel('$:)$')
-                plt.legend()
-                plt.grid(True)
-                plt.show()
-                plt.savefig(self.label)
+        self.plot_fit.set(xlabel='$:)$', ylabel='$:)$') #plot_fit labels and legend
+        self.plot_fit.legend()
+        self.plot_fit.grid(True)
 
+        self.plot_res.errorbar(self.x,self.res/self.s_y,np.full_like(self.x,1),fmt=".",label="Residui")
 
+        self.plot_res.set(xlabel='$:)$', ylabel='$residui/\sigma$') #plot_fit labels and legend
+        self.plot_res.legend()
+        self.plot_res.grid(True)
 
-
-    def x2_res_p(self):
-
-
-        if (np.size(list(self.label))>0):
-
-            plt.figure(self.label+" Residui")
-
-            self.res=residuals(self.func,self.params,self.y,self.x)
-            self.dof=np.size(self.params)
-            self.p_value,self.x2=x2_p_value(self.res,self.s_y,self.dof)
-
-            plt.errorbar(self.x,self.res/self.s_y,np.full_like(self.x,1),fmt=".",label="Residui")
-
-            plt.xlabel('$:)$')
-            plt.ylabel('$residui/\sigma$')
-            plt.legend()
-            plt.grid(True)
-            plt.show()
-            plt.savefig(self.label+"_residui")
+        self.fig.savefig(self.label)
+        plt.show()
 
 
 ## Give your file path!
 
-file_path=r".txt"
+file_path=r"deleteme.txt"
 
 
 ## Uncertainties: the exteem is your! This is your duty !
@@ -147,10 +137,9 @@ s_y=2
 
 ## Call a first data set,.
 
-data1=data_set(file_path,"", PUT HERE THE FITTING FUNCTION tw,s_x,s_y)
-data1.p0=[1,2] # give here teh initial guess before calling the functions
+data1=data_set(file_path,"deleteme", k,s_x,s_y)
+data1.p0=[1,2] # give here the initial guess before calling the functions
 
 ## Call the functions
 data1.fit()
 data1.plot()
-data1.x2_res_p()
