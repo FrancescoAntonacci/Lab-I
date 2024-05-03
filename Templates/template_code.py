@@ -4,6 +4,14 @@ from matplotlib import pyplot as plt
 from scipy.optimize import curve_fit
 from scipy import stats
 from scipy.stats import chi2
+import os
+
+# Specify the directory path you want to change to
+directory_path = r"C:\Users\zoom3\Documents\Unipi\Laboratorio I\LaboratoryReports"
+
+# Change the current working directory
+os.chdir(directory_path)
+
 
 
 ## Pimp my plot
@@ -20,26 +28,14 @@ params = {
     'grid.linewidth': 1,        # Grid line width
     'grid.alpha': 0.5,          # Grid transparency
     'savefig.dpi': 600,         # Resolution of saved figures
-    'savefig.transparent': True # Save figures with transparent background
+    'savefig.transparent': True, # Save figures with transparent background
+    'legend.loc': 'upper right' # Legend location
+
 }
 
 plt.rcParams.update(params)
 
 ## Functions
-
-
-def mean_and_sample_sigma(v):
-    """
-    this function calculates the sample standard deviation
-    """
-    n=v.size
-    m=sum(v)/n
-    a=np.full_like(v,m)
-    a=v-a
-    s=sum(a**2)/(n-1)
-    std_dev= np.sqrt(s)
-    return m,std_dev
-
 
 def residuals(func,params,yy,xx):
     """
@@ -109,12 +105,12 @@ class data_set():
                 self.xx=np.linspace(min(self.x),max(self.x),10000)
                 self.yy=self.func(self.xx,*self.params)
                 plt.plot(self.xx,self.yy,label="Previsione best-fit")
-                plt.xlabel(r'$:)$')
-                plt.ylabel(r'$:)$')
+                plt.xlabel('$:)$')
+                plt.ylabel('$:)$')
                 plt.legend()
                 plt.grid(True)
                 plt.show()
-                # plt.savefig(self.label1)
+                plt.savefig(self.label)
 
 
 
@@ -132,27 +128,27 @@ class data_set():
 
             plt.errorbar(self.x,self.res/self.s_y,np.full_like(self.x,1),fmt=".",label="Residui")
 
-            plt.xlabel(r'$:)$')
-            plt.ylabel(r'$residui/\sigma$')
+            plt.xlabel('$:)$')
+            plt.ylabel('$residui/\sigma$')
             plt.legend()
             plt.grid(True)
             plt.show()
-            # plt.savefig(self.label1+"_residuals")
+            plt.savefig(self.label+"_residui")
 
 
 ## Give your file path!
 
-file_path=r"deleteme.txt"
+file_path=r".txt"
 
 
 ## Uncertainties: the exteem is your! This is your duty !
-s_x=
-s_y=
+s_x=1
+s_y=2
 
 ## Call a first data set,.
 
-data1=data_set(file_path,"Dati raccolti",k,s_x,s_y)
-data1.p0=0 # give here teh initial guess before calling the functions
+data1=data_set(file_path,"", PUT HERE THE FITTING FUNCTION tw,s_x,s_y)
+data1.p0=[1,2] # give here teh initial guess before calling the functions
 
 ## Call the functions
 data1.fit()
